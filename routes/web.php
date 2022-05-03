@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessengerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ Route::get('/', function () {
     return view('messenger.messenger');
 });
 
+Route::get('/test',[MessengerController::class,'test']);
 
 
 Route::get('/dashboard', function () {
