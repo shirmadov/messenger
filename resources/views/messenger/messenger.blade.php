@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500&family=Nunito:wght@300;400&display=swap" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="/css/main.css?v={{ Config::get('app.media_files_version') }}">
 </head>
@@ -20,6 +21,7 @@
 
             <div class="left__card">
 
+
                 <div class="search__main">
                     <div class="search__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
@@ -29,62 +31,95 @@
                         </svg>
                     </div>
                     <input class="search__stick" type="text" placeholder="Search">
+{{--                    <x-slot name="content">--}}
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+{{--                    </x-slot>--}}
                 </div>
                 <div class="user__list">
 
                     <ul class="user__ul__list">
 
-                        @for($i=0;$i<10;$i++)
-                        <li class="user__li__list">
-                            <div class="user__pr__name">
-                                <img class="user__profile" src="{{asset('img/profile/anton.jpg')}}" alt=""/>
+                        @foreach($users as $key=>$user)
+                            <li class="user__li__list">
+                                <div class="user__pr__name">
+                                    <img class="user__profile" src="{{asset('img/profile/anton.jpg')}}" alt=""/>
 
-                                <div style="height: 45px;">
-                                    <div class="column user__name__text" >
-                                        <span class="user__name">Anton Ptushkin</span>
-                                        <span class="user__last__text">Hello! Sapa. How are you?</span>
+                                    <div style="height: 45px;">
+                                        <div class="column user__name__text" >
+                                            <span class="user__name">{{$user->name}}</span>
+                                            <span class="user__last__text">Hello! Sapa. How are you?</span>
+                                        </div>
+                                        <div class="column user__msg__time__notif">
+                                            <span class="user__msg__time">Wed</span>
+                                            <span class="user__msg__notif">12</span>
+                                        </div>
                                     </div>
-                                    <div class="column user__msg__time__notif">
-                                        <span class="user__msg__time">Wed</span>
-                                        <span class="user__msg__notif">12</span>
-                                    </div>
+
+
                                 </div>
+                            </li>
+                        @endforeach
+
+{{--                        @for($i=0;$i<10;$i++)--}}
+{{--                        <li class="user__li__list">--}}
+{{--                            <div class="user__pr__name">--}}
+{{--                                <img class="user__profile" src="{{asset('img/profile/anton.jpg')}}" alt=""/>--}}
+
+{{--                                <div style="height: 45px;">--}}
+{{--                                    <div class="column user__name__text" >--}}
+{{--                                        <span class="user__name">Anton Ptushkin</span>--}}
+{{--                                        <span class="user__last__text">Hello! Sapa. How are you?</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="column user__msg__time__notif">--}}
+{{--                                        <span class="user__msg__time">Wed</span>--}}
+{{--                                        <span class="user__msg__notif">12</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
 
-                            </div>
-                        </li>
-                        <li class="user__li__list">
-                            <div class="user__pr__name">
-                            <img class="user__profile" src="{{asset('img/profile/benzema2.jpg')}}" alt="">
-                                <div style="height: 45px;">
-                                    <div class="column user__name__text" >
-                                        <span class="user__name">Karim Benzema</span>
-                                        <span class="user__last__text">Hello, Benz!</span>
-                                    </div>
-                                    <div class="column user__msg__time__notif">
-                                        <span class="user__msg__time">Thu</span>
-                                        <span class="user__msg__notif">1</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="user__li__list">
-                            <div class="user__pr__name">
-                            <img class="user__profile" src="{{asset('img/profile/sergio.jpg')}}" alt="">
-                                <div style="height: 45px;">
-                                    <div class="column user__name__text" >
-                                        <span class="user__name">Sergio Ramos</span>
-                                        <span class="user__last__text">Vamos Hala Madrid</span>
-                                    </div>
-                                    <div class="column user__msg__time__notif">
-                                        <span class="user__msg__time">12:20 pm</span>
-                                        <span class="user__msg__notif">5</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+{{--                            </div>--}}
+{{--                        </li>--}}
+{{--                        <li class="user__li__list">--}}
+{{--                            <div class="user__pr__name">--}}
+{{--                            <img class="user__profile" src="{{asset('img/profile/benzema2.jpg')}}" alt="">--}}
+{{--                                <div style="height: 45px;">--}}
+{{--                                    <div class="column user__name__text" >--}}
+{{--                                        <span class="user__name">Karim Benzema</span>--}}
+{{--                                        <span class="user__last__text">Hello, Benz!</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="column user__msg__time__notif">--}}
+{{--                                        <span class="user__msg__time">Thu</span>--}}
+{{--                                        <span class="user__msg__notif">1</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </li>--}}
+{{--                        <li class="user__li__list">--}}
+{{--                            <div class="user__pr__name">--}}
+{{--                            <img class="user__profile" src="{{asset('img/profile/sergio.jpg')}}" alt="">--}}
+{{--                                <div style="height: 45px;">--}}
+{{--                                    <div class="column user__name__text" >--}}
+{{--                                        <span class="user__name">Sergio Ramos</span>--}}
+{{--                                        <span class="user__last__text">Vamos Hala Madrid</span>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="column user__msg__time__notif">--}}
+{{--                                        <span class="user__msg__time">12:20 pm</span>--}}
+{{--                                        <span class="user__msg__notif">5</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </li>--}}
 
-                            @endfor
+{{--                            @endfor--}}
 
 
 
@@ -199,9 +234,10 @@
                 </div>
                 <div class="right__card__form">
                     <form id="msg__form" class="msg__form" action="">
+                        @csrf
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23">
                             <path fill="none" fill-rule="evenodd" stroke="#F5F5DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.44 10.05l-9.19 9.19a6.003 6.003 0 1 1-8.49-8.49l9.19-9.19a4.002 4.002 0 0 1 5.66 5.66l-9.2 9.19a2.001 2.001 0 0 1-2.83-2.83l8.49-8.48" transform="translate(1 1)"/></svg>
-                    <textarea class="msg__textarea js__msg__textarea" name="msg__text" id="js__msg__textarea" rows="1" autofocus autocomplete="off" placeholder="Text message"></textarea>
+                    <textarea class="msg__textarea js__msg__textarea" name="msg_text" id="js__msg__textarea" rows="1" autofocus autocomplete="off" placeholder="Text message"></textarea>
 
                         <button type="submit" class="msg__send__btn js__msg__send__btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">

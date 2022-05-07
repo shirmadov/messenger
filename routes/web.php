@@ -15,9 +15,13 @@ use App\Http\Controllers\MessengerController;
 */
 
 Route::get('/', function () {
-    return view('messenger.messenger');
+    return view('index');
 });
 
+
+
+Route::get('/messenger',[MessengerController::class,'index'])->name('messenger')->middleware(['auth']);
+Route::post('/save_msg',[MessengerController::class,'store'])->name('save_msg')->middleware(['auth']);
 Route::get('/test',[MessengerController::class,'test']);
 
 

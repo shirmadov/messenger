@@ -1,5 +1,6 @@
 let form = document.querySelector("#msg__form");
-const socket = new WebSocket('ws://localhost:8000');
+// const socket = new WebSocket('ws://localhost:8000');
+let app_url = location.origin;
 
 function sendMsg(){
 
@@ -7,9 +8,14 @@ function sendMsg(){
         e.preventDefault();
         let target = e.target;
         let formData = new FormData(target);
+        let url = app_url+'/save_msg';
 
         // console.log(formData.get('msg__text'))
-        socket.send(JSON.stringify(formData.get('msg__text')));
+        let response = sendData(formData, url);
+
+        console.log(response);
+
+        // socket.send(JSON.stringify(formData.get('msg__text')));
 
         await clearInput();
     })
@@ -17,7 +23,26 @@ function sendMsg(){
 
 }
 
+const sendData = async (formData, url)=>{
+    try {
+        const csrfToken = document.querySelector('[name=csrf-token]').content;
+        const headers = new Headers({
+            'X-CSRF-TOKEN':csrfToken,
+            'Cache-Control': 'no-cache, no-store'
+        })
 
+        const response = await fetch(url,{
+            method:'POST',
+            headers,
+            body:formData
+        })
+            .then(res=>res.json());
+        return response;
+    }catch(error){
+        console.log('Error:', error);
+    }
+
+}
 
 
 
@@ -47,4 +72,7 @@ function clearInput(){
 document.addEventListener("DOMContentLoaded", ()=>{
     sendMsg();
     formTextarea();
+
+    const csrfToken = document.querySelector('[name=csrf-token]').content;
+
 })
