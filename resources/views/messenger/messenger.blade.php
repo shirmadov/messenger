@@ -20,8 +20,6 @@
     <div class="container">
 
             <div class="left__card">
-
-
                 <div class="search__main">
                     <div class="search__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
@@ -48,27 +46,8 @@
 
                     <ul class="user__ul__list">
 
-                        @foreach($users as $key=>$user)
-                            <li class="user__li__list">
-                                <div class="user__pr__name">
-                                    <img class="user__profile" src="{{asset('img/profile/anton.jpg')}}" alt=""/>
 
-                                    <div style="height: 45px;">
-                                        <div class="column user__name__text" >
-                                            <span class="user__name">{{$user->name}}</span>
-                                            <span class="user__last__text">Hello! Sapa. How are you?</span>
-                                        </div>
-                                        <div class="column user__msg__time__notif">
-                                            <span class="user__msg__time">Wed</span>
-                                            <span class="user__msg__notif">12</span>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </li>
-                        @endforeach
-
+                    @include('messenger.module.users')
 {{--                        @for($i=0;$i<10;$i++)--}}
 {{--                        <li class="user__li__list">--}}
 {{--                            <div class="user__pr__name">--}}
@@ -134,100 +113,10 @@
                <div class="right__card__header">
                 asdasd
                </div>
-                <div class="right__card__msg__list">
-                    <div style="  display: flex; justify-content: center;">
+                <div class="right__card__msg__list js__right__card__msg__list" id="js__card_msg__list">
+                    <div class="msg__main__card js__msg__main__card" style="  display: flex; justify-content: center;" id="js__msg__card">
                         <ul class="msg__list__ul">
-                            <li class="msg__list__li">
-                                <div class="msg__card__left">
-{{--                                        <pre class="msg__text">--}}
-{{--                                           --}}
-{{--                                        </pre>--}}
-                                    Hello
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="msg__list__li">
-                                <div class="msg__card__left">
-                                        How are you? asdas zsdasdas sdfasdfa
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="msg__list__li">
-                                <div class="msg__card__left">
-                                    Lorem Ipsum is simply dummy text of the pri nting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book make a type specimen dfsdfsdfs.
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-
-                                </div>
-                            </li>
-
-                            <li class="msg__list__li">
-                                <div class="msg__card__right">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-                                </div>
-                            </li>
-
-                            <li class="msg__list__li">
-                                <div class="msg__card__right">
-                                    Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так.
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="msg__list__li">
-                                <div class="msg__card__right">
-                                    Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так.
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="msg__list__li">
-                                <div class="msg__card__right">
-                                    Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так.
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="msg__list__li">
-                                <div class="msg__card__right">
-                                    Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так.
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="msg__list__li">
-                                <div class="msg__card__right">
-                                    Hello
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="msg__list__li">
-                                <div class="msg__card__right">
-                                    Hi
-                                    <span class="msg__time">
-                                        12:30
-                                    </span>
-                                </div>
-                            </li>
-{{--                            <li class="msg__list__li">--}}
-{{--                                <div class="msg__card__right">--}}
-{{--                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
+                            @include('messenger.module.messages')
                         </ul>
 
                     </div>

@@ -66,13 +66,42 @@ function clearInput(){
 }
 
 
+function chooseUser(){
 
+    document.addEventListener('click',async function(e){
+       const target = e.target;
+       if ((!target.closest('.js__user__li__list')) && (!target.closest('.js__user__li__list'))) return;
+       let user_li = target.closest('.js__user__li__list');
+       let user_id = user_li.querySelector('.js__user__id').value;
+       let url = app_url+'/choose_user';
+       let formData = new FormData;
+       formData.append('user_id', user_id);
+
+       let response = await sendData(formData, url);
+
+       if(response.success == true){
+           
+       }
+
+
+
+
+
+    });
+
+}
+
+function autoScroll(){
+    let getdiv = document.getElementById('js__card_msg__list');
+    getdiv.scrollTop = getdiv.scrollHeight - getdiv.clientHeight;
+}
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
     sendMsg();
     formTextarea();
-
+    autoScroll();
+    chooseUser();
     const csrfToken = document.querySelector('[name=csrf-token]').content;
 
 })

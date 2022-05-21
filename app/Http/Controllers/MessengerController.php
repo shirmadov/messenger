@@ -33,4 +33,14 @@ class MessengerController extends Controller
       return view('messenger.messenger');
   }
 
+  public function choose(Request $request){
+
+      try {
+
+      }catch(\Exception $e){
+
+      }
+
+  }
+
 }
