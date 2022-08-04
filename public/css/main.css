@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6{
     padding: 15px;
     background-color: #142233;
     color: #778899;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
 }
 
@@ -84,6 +84,9 @@ input[type=text] {
 
 ::placeholder{
     color:#A9A9A9;
+    /*color:red;*/
+    font-weight: 300;
+    font-family: 'Fira Sans', sans-serif;
 }
 
 
@@ -211,7 +214,23 @@ input[type=text] {
     center no-repeat;
     -webkit-background-size:cover;
     background-size: cover;
+    display: none;
 
+}
+
+.right__card__select{
+    width: 60%;
+    float: right;
+    /*border: 1px solid #213854;*/
+    /*border-radius: 0 5px 5px 0;*/
+    height: 100vh;
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    color: white;
+    font-size: 18px;
 }
 
 .right__card__header{

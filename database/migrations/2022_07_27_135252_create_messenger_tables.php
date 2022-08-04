@@ -35,10 +35,12 @@ class CreateMessengerTables extends Migration
             Schema::create('messages', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('chat_list_id');
+                $table->unsignedBigInteger('author_id');
                 $table->longText('text')->nullable();
                 $table->jsonb('read');
                 $table->softDeletes();
                 $table->foreign('chat_list_id')->references('id')->on('chat_list')->onDelete('cascade');
+                $table->foreign('author_id')->references('id')->on('users');
                 $table->timestamps();
             });
         }
@@ -78,7 +80,6 @@ class CreateMessengerTables extends Migration
                 $table->timestamps();
             });
         }
-
     }
 
     /**
@@ -88,6 +89,11 @@ class CreateMessengerTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messenger_tables');
+        Schema::dropIfExists('chat_type');
+        Schema::dropIfExists('chat_list');
+        Schema::dropIfExists('messages');
+        Schema::dropIfExists('message_files');
+        Schema::dropIfExists('user_to_user_chat');
+        Schema::dropIfExists('group_chat');
     }
 }

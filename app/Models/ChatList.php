@@ -24,4 +24,20 @@ class ChatList extends Model
 
     }
 
+    public function createUserToUser($chosen_id)
+    {
+        $user = \Auth()->user();
+
+        $chat_list_id = $this->createChat();
+        $user_to_user = new UserToUserChat;
+
+        $user_to_user->chat_list_id = $chat_list_id;
+        $user_to_user->user_fr_id = $user->id;
+        $user_to_user->user_sc_id = $chosen_id;
+        $user_to_user->save();
+
+        return $chat_list_id;
+    }
+
+
 }

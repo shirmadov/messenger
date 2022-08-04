@@ -109,14 +109,16 @@
 
 
             </div>
-            <div class="right__card">
+            <div class="right__card js__right__card">
                <div class="right__card__header">
                 asdasd
                </div>
                 <div class="right__card__msg__list js__right__card__msg__list" id="js__card_msg__list">
                     <div class="msg__main__card js__msg__main__card" style="  display: flex; justify-content: center;" id="js__msg__card">
-                        <ul class="msg__list__ul">
-                            @include('messenger.module.messages')
+                        <ul class="msg__list__ul js__msg__list__ul">
+{{--                            @if(isset($messages))--}}
+{{--                            @include('messenger.module.messages')--}}
+{{--                            @endif--}}
                         </ul>
 
                     </div>
@@ -139,6 +141,9 @@
 
 
             </div>
+        <div class="right__card__select js__right__card__select">
+            Select a chat to start messaging
+        </div>
     </div>
 </div>
 
