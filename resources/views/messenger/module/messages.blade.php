@@ -1,7 +1,9 @@
 
 @foreach($messages as $message)
 <li class="msg__list__li">
-    <div class="msg__card__right">
+
+    <div class="msg__card__right js__msg__card">
+        <input class="js__msg__id" type="hidden" value="{{$message->id}}">
         {{--                                        <pre class="msg__text">--}}
         {{--                                           --}}
         {{--                                        </pre>--}}
@@ -12,6 +14,8 @@
     </div>
 </li>
 @endforeach
+
+
 
 {{--<li class="msg__list__li">--}}
 {{--    <div class="msg__card__left">--}}

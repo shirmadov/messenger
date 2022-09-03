@@ -19,9 +19,11 @@ class MessengerController extends Controller
   }
 
 
-  public function store(Request $request, ChatList $chatList, Message $message, UserToUserChat $userToUserChat){
+  public function store(Request $request, ChatList $chatList, Message $message, UserToUserChat $userToUserChat, User $user){
 
       try {
+
+          $hash_tokens = array();
 
         if($request->chat_type === 'user_to_user'){
             $chat_list_id = $userToUserChat->checkUserToUser($request->chosen_id);
@@ -32,14 +34,19 @@ class MessengerController extends Controller
 
             $message = $message->saveMsg($request->msg_text, $chat_list_id);
 
+            $hash_tokens[] = $user->getHashToken($request->chosen_id);
+
         }else if($request->chat_type === 'group'){
 
         }
-        $test = "Text";
-//        dd($test);
+
 
 //        $html = view('messenger.module.messages', compact())->render();
-          return response()->json(['success'=>true,'content'=>$message]);
+          return response()->json([
+              'success'=>true,
+              'hash_tokens'=>$hash_tokens,
+              'content'=>$message
+          ]);
 
 
       }catch(\Exception $e){
@@ -52,7 +59,7 @@ class MessengerController extends Controller
 
       try {
 
-          $user = \Auth()->user()->id;
+//          dd($request->all());
           $chat_list_id = $userToUserChat->checkUserToUser($request->user_id);
           $messages =  $message->getMsg($chat_list_id);
 

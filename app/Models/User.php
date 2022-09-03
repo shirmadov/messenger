@@ -42,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getHashToken($user_id){
+        return $this->where('id', $user_id)->value('hash_login_token');
+    }
+
 }

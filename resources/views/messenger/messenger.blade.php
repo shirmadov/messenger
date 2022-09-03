@@ -109,6 +109,7 @@
 
 
             </div>
+        <input class="js__hash_user" type="hidden" value="{{\Auth()->user()->hash_login_token}}">
             <div class="right__card js__right__card">
                <div class="right__card__header">
                 asdasd
