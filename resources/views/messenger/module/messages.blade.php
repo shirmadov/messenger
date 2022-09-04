@@ -2,7 +2,7 @@
 @foreach($messages as $message)
 <li class="msg__list__li">
 
-    <div class="msg__card__right js__msg__card">
+    <div class="@if($message->author_id === \Auth()->user()->id) msg__card__right @else msg__card__left @endif js__msg__card">
         <input class="js__msg__id" type="hidden" value="{{$message->id}}">
         {{--                                        <pre class="msg__text">--}}
         {{--                                           --}}

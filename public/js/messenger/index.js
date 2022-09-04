@@ -6,8 +6,8 @@ const wss = new WebSocket.Server({port:8000}, ()=>{
     console.log('Connected');
 });
 
-const clients = new Set();
-
+// const clients = new Set();
+// CLIENTS = [];
 
 wss.on('connection', function connection(ws) {
     ws.on('message', function message(data) {
@@ -15,18 +15,21 @@ wss.on('connection', function connection(ws) {
         const all_data = JSON.parse(data);
         // console.log(all_data);
 
-        if(all_data.data_type === "Id"){
-            ws.id = data.hash_token;
-            clients.add(ws)
-        }else if(all_data.data_type === "message"){
+        if(all_data.data_type === 1){
+            ws.id = all_data.hash_token;
+        }else if(all_data.data_type === 2){
 
             if(all_data.hash_tokens){
+
                 wss.clients.forEach(function each(client){
-                    console.log(client.id)
-                    // if(all_data.hash_tokens.includes(client.id) && client.readyState === WebSocket.OPEN){
-                    //     client.send(JSON.stringify(all_data));
-                    // }
-                })
+                    console.log('Clients',client.id)
+                    if(all_data.hash_tokens.includes(client.id))
+                    {
+                        console.log('Clients',client.id)
+                        client.send(JSON.stringify(all_data));
+                    }
+                });
+
             }
 
 

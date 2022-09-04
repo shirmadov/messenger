@@ -1,7 +1,7 @@
 let form = document.querySelector("#msg__form");
 const socket = new WebSocket('ws://localhost:8000');
 let app_url = location.origin;
-let chosen_id;
+let chosen_id = null;
 let chat_type = 'user_to_user'
 
 function sendMsg(){
@@ -16,39 +16,45 @@ function sendMsg(){
         formData.append('chat_type',chat_type);
         const response = await sendData(formData, url);
 
-        console.log(response);
-        if(response.success === true){
-            let text = response.content.text;
-            console.log(response.content);
-            const d = new Date();
-            let h = d.getHours();
-            let m = d.getMinutes();
-            let html = '<li class="msg__list__li js__msg__list__li">\n' +
-                '<div class="msg__card__right">\n' + text +
-                '<span class="msg__time">'
-                + h +':'+ m +
-                '</span>\n' +
-                '</div>\n' +
-                '</li>'
-
-            document.querySelector('.js__msg__list__ul').insertAdjacentHTML('beforeend',html);
-        }
+        response.success && await showMsg(response.content)
 
         let data = {
-            data_type:'message',
+            data_type:2,    //message
             hash_tokens:response.hash_tokens,
             text:response.content.text,
         }
 
         socket.send(JSON.stringify(data));
-        await autoScroll();
         await clearInput();
     })
 }
 
 socket.onmessage = async (event)=>{
     let data = JSON.parse(event.data);
-    console.log("Come");
+    await showMsg(data,2);
+}
+
+let showMsg = async (data, author = 1) => {
+
+    if(chosen_id !== null){
+        const d = new Date();
+        let h = d.getHours();
+        let m = d.getMinutes();
+        let right_left = author === 1?"msg__card__right":"msg__card__left";
+        let html = '<li class="msg__list__li js__msg__list__li">\n' +
+            '<div class="'+right_left+'">\n' + data.text +
+            '<span class="msg__time">'
+            + h +':'+ m +
+            '</span>\n' +
+            '</div>\n' +
+            '</li>'
+
+        document.querySelector('.js__msg__list__ul').insertAdjacentHTML('beforeend',html);
+        await autoScroll();
+    }else{
+
+    }
+
 }
 
 
@@ -64,8 +70,6 @@ function chooseUser(){
         formData.append('user_id', user_id);
 
         let response = await sendData(formData, url);
-
-        console.log(response);
 
         if(response.success == true){
             await changeRightCard()
@@ -92,7 +96,6 @@ const sendData = async (formData, url)=>{
         })
             .then(res=>res.json());
 
-        console.log(response);
         return response;
     }catch(error){
         console.log('Error:', error);
@@ -103,7 +106,7 @@ const sendData = async (formData, url)=>{
 socket.onopen = function(e){
 
     let data = {
-        data_type: "Id",
+        data_type: 1,//Id
         hash_token: document.querySelector('.js__hash_user').value
     }
     console.log('Connected')
