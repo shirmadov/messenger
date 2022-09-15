@@ -47,4 +47,11 @@ class User extends Authenticatable
         return $this->where('id', $user_id)->value('hash_login_token');
     }
 
+    public function getUsers(){
+        $user_id = \Auth()->user()->id;
+        dd($user_id);
+//        $user_to_user_chat = UserToUserChat::where('');
+    }
+
+
 }

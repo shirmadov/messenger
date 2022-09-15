@@ -11,9 +11,11 @@ use Illuminate\Http\Request;
 class MessengerController extends Controller
 {
 
-  public function index(Message $message){
+  public function index(Message $message, User $user){
 
       $users = User::get();
+
+//      dd($users);
 
       return view('messenger.messenger', compact('users'));
   }
@@ -32,7 +34,7 @@ class MessengerController extends Controller
                 $chat_list_id = $chatList->createUserToUser($request->chosen_id);
             }
 
-            $message = $message->saveMsg($request->msg_text, $chat_list_id);
+            $message = $message->saveMsg($request->msg_text, $chat_list_id,$request->chosen_id);
 
             $hash_tokens[] = $user->getHashToken($request->chosen_id);
 

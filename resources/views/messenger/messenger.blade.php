@@ -9,106 +9,71 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500&family=Nunito:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500&family=Nunito:wght@300;400&family=Kanit:wght@300;400&display=swap" rel="stylesheet">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="/css/main.css?v={{ Config::get('app.media_files_version') }}">
+    <link rel="stylesheet" href="/css/menu.css?v={{ Config::get('app.media_files_version') }}">
 </head>
 <body>
 
 <div class="main">
     <div class="container">
 
-            <div class="left__card">
-                <div class="search__main">
-                    <div class="search__icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
-                            <path d="M1 1H21" stroke="#F5F5DC" stroke-width="1" stroke-linecap="round"/>
-                            <path d="M1 8H21" stroke="#F5F5DC" stroke-width="1" stroke-linecap="round"/>
-                            <path d="M1 15H21" stroke="#F5F5DC" stroke-width="1" stroke-linecap="round"/>
-                        </svg>
+{{--        <div class="left__card">--}}
+{{--            <div class="pages">--}}
+{{--                <div class="page one active">--}}
+{{--                    <h1>PAGE 1</h1>--}}
+{{--                    <div>--}}
+{{--                        <button onClick="slide('next')">Next</button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="page two">--}}
+{{--                    <h1>PAGE 2</h1>--}}
+{{--                    <div>--}}
+{{--                        <button onClick="slide('prev')">Previous</button>--}}
+{{--                        <button onClick="slide('next')">Next</button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+
+            <div class="left__card js__left__card" >
+                <div class="pages">
+                    <div class="page page__user js__page__user">
+                        <div class="search__main">
+                            <div class="hamburger__menu js__hamburger__menu">
+                                <svg class="icon__hamburg" xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 1H21" stroke="#F5F5DC" stroke-width="1" stroke-linecap="round"/>
+                                    <path d="M1 8H21" stroke="#F5F5DC" stroke-width="1" stroke-linecap="round"/>
+                                    <path d="M1 15H21" stroke="#F5F5DC" stroke-width="1" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <input class="search__stick" type="text" placeholder="Search">
+                        </div>
+
+                        @include('messenger.module.menu')
+                        @include('messenger.module.users')
                     </div>
-                    <input class="search__stick" type="text" placeholder="Search">
-{{--                    <x-slot name="content">--}}
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                             onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-{{--                    </x-slot>--}}
+                    <div class="page page__settings js__page__settings">
+                        <div class="st__header">
+                            <div class="back__to__menu js__back__to__menu" onClick="slide('prev')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 12L3.29289 11.2929L2.58579 12L3.29289 12.7071L4 12ZM19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11V13ZM9.29289 5.29289L3.29289 11.2929L4.70711 12.7071L10.7071 6.70711L9.29289 5.29289ZM3.29289 12.7071L9.29289 18.7071L10.7071 17.2929L4.70711 11.2929L3.29289 12.7071ZM4 13H19V11H4V13Z" fill="#CCD2E3"/>
+                                </svg>
+                            </div>
+                            <span class="st__header__name">Settings</span>
+                        </div>
+                        Text mext next
+                    </div>
                 </div>
-                <div class="user__list">
-
-                    <ul class="user__ul__list">
-
-
-                    @include('messenger.module.users')
-{{--                        @for($i=0;$i<10;$i++)--}}
-{{--                        <li class="user__li__list">--}}
-{{--                            <div class="user__pr__name">--}}
-{{--                                <img class="user__profile" src="{{asset('img/profile/anton.jpg')}}" alt=""/>--}}
-
-{{--                                <div style="height: 45px;">--}}
-{{--                                    <div class="column user__name__text" >--}}
-{{--                                        <span class="user__name">Anton Ptushkin</span>--}}
-{{--                                        <span class="user__last__text">Hello! Sapa. How are you?</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="column user__msg__time__notif">--}}
-{{--                                        <span class="user__msg__time">Wed</span>--}}
-{{--                                        <span class="user__msg__notif">12</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-
-{{--                            </div>--}}
-{{--                        </li>--}}
-{{--                        <li class="user__li__list">--}}
-{{--                            <div class="user__pr__name">--}}
-{{--                            <img class="user__profile" src="{{asset('img/profile/benzema2.jpg')}}" alt="">--}}
-{{--                                <div style="height: 45px;">--}}
-{{--                                    <div class="column user__name__text" >--}}
-{{--                                        <span class="user__name">Karim Benzema</span>--}}
-{{--                                        <span class="user__last__text">Hello, Benz!</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="column user__msg__time__notif">--}}
-{{--                                        <span class="user__msg__time">Thu</span>--}}
-{{--                                        <span class="user__msg__notif">1</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </li>--}}
-{{--                        <li class="user__li__list">--}}
-{{--                            <div class="user__pr__name">--}}
-{{--                            <img class="user__profile" src="{{asset('img/profile/sergio.jpg')}}" alt="">--}}
-{{--                                <div style="height: 45px;">--}}
-{{--                                    <div class="column user__name__text" >--}}
-{{--                                        <span class="user__name">Sergio Ramos</span>--}}
-{{--                                        <span class="user__last__text">Vamos Hala Madrid</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="column user__msg__time__notif">--}}
-{{--                                        <span class="user__msg__time">12:20 pm</span>--}}
-{{--                                        <span class="user__msg__notif">5</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </li>--}}
-
-{{--                            @endfor--}}
-
-
-
-
-                    </ul>
-
-                </div>
-
 
             </div>
+
+
+
         <input class="js__hash_user" type="hidden" value="{{\Auth()->user()->hash_login_token}}">
             <div class="right__card js__right__card">
                <div class="right__card__header">
@@ -117,9 +82,9 @@
                 <div class="right__card__msg__list js__right__card__msg__list" id="js__card_msg__list">
                     <div class="msg__main__card js__msg__main__card" style="  display: flex; justify-content: center;" id="js__msg__card">
                         <ul class="msg__list__ul js__msg__list__ul">
-{{--                            @if(isset($messages))--}}
-{{--                            @include('messenger.module.messages')--}}
-{{--                            @endif--}}
+                            @if(isset($messages))
+                            @include('messenger.module.messages')
+                            @endif
                         </ul>
 
                     </div>
@@ -149,5 +114,6 @@
 </div>
 
 <script src="{{asset('/js/messenger/messenger.js')}}"></script>
+<script src="{{asset('/js/messenger/main.js')}}"></script>
 </body>
 </html>

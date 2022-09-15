@@ -5,6 +5,7 @@ html, body{
     margin: 0;
     font-family: 'Josefin Sans', sans-serif;
     background-color: #142233;
+    overflow: hidden
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -18,20 +19,20 @@ h1, h2, h3, h4, h5, h6{
 }
 
 .right__card__msg__list::-webkit-scrollbar,
-.user__list::-webkit-scrollbar{
+.user__ul__list::-webkit-scrollbar{
     -webkit-appearance: none;
     width: 5px;
 
 }
 .right__card__msg__list::-webkit-scrollbar-track,
-.user__list::-webkit-scrollbar-track{
+.user__ul__list::-webkit-scrollbar-track{
     -webkit-appearance: none;
     border-radius: 5px;
     display: none;
 }
 
 .right__card__msg__list::-webkit-scrollbar-thumb,
-.user__list::-webkit-scrollbar-thumb{
+.user__ul__list::-webkit-scrollbar-thumb{
     -webkit-appearance: none;
     border-radius: 5px;
     background: #dedede;
@@ -50,8 +51,10 @@ h1, h2, h3, h4, h5, h6{
     max-width: 1200px;
     margin: 0 auto;
     height: 100vh;
-    background-color: #08264B;
+    /*background-color: #08264B;*/
     background-color:  #142C41;
+
+
 }
 
 /*----SEARCH USER-----  */
@@ -60,20 +63,18 @@ h1, h2, h3, h4, h5, h6{
     display: flex;
 }
 
-.search__icon{
-    /*display: flex;*/
-    float: left;
-    margin-top: 5px;
-    margin-right:10px ;
-}
 .search__stick{
+    /*font-family: 'Kanit', sans-serif;*/
+    font-family: 'Nunito', sans-serif;
     height: 30px;
     width: 70%;
     padding: 15px;
     background-color: #142233;
     color: #778899;
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: inherit;
+    letter-spacing: 0.5px;
 }
 
 input[type=text] {
@@ -99,18 +100,27 @@ input[type=text] {
     /*overflow: auto;*/
     height: 100%;
 
+    overflow: hidden;
 }
 
 .user__list{
-    overflow-y: scroll;
-    height: 92.5vh;
+
+
 }
 
 .user__ul__list{
+    height: 93vh;
+    overflow: hidden;
     padding: 10px;
     list-style: none;
     /*margin-bottom: 5px;*/
 }
+
+.user__ul__list:hover{
+    overflow-y: scroll;
+}
+
+
 
 .user__li__list{
     /*margin-bottom: 10px;*/
@@ -122,7 +132,6 @@ input[type=text] {
 
 .user__li__list:hover {
     border-radius: 5px;
-    background-color: #0C3261;
     background-color: #1C3851;
     cursor:pointer;
     /*color:	#000000 ;*/
@@ -408,3 +417,110 @@ textarea::placeholder {
     background-color:#142C41 ;
 }
 
+/*.left__card__st{*/
+/*    width: 40%;*/
+/*    display: none;*/
+/*    border: 1px solid #213854;*/
+/*    border-radius: 5px 0 0 5px;*/
+/*    !*overflow: auto;*!*/
+/*    height: 100%;*/
+
+/*}*/
+
+/*.page__user{*/
+/*    margin: 0;*/
+/*}*/
+
+/*.page__settings{*/
+/*    margin:0;*/
+/*    display: none;*/
+/*}*/
+
+.st__header{
+    margin: 10px 0 10px 10px;
+    display: flex;
+}
+
+.back__to__menu{
+    float: left;
+    /*margin-top: 5px;*/
+    margin-right:10px ;
+    cursor: pointer;
+    padding: 8px 8px 5px 8px;
+    transition: 0.2s;
+    border-radius: 50%;
+}
+
+.back__to__menu:hover{
+    backdrop-filter: blur(6px);
+    background-color: #1A364F;
+}
+
+.st__header__name{
+    color: #ffffff;
+    display: inline-block;
+    margin: auto 20px;
+    font-size: 18px;
+}
+
+
+/*.page {*/
+/*    !*opacity: 0;*!*/
+/*    !*width: 100%;*!*/
+/*    !*height: 100vh;*!*/
+/*    !*display: flex;*!*/
+/*    !*align-items: center;*!*/
+/*    justify-content: center;*/
+/*    flex-direction: column;*/
+/*    gap: 10px;*/
+/*    transform: translateX(0);*/
+/*    transition: all 0.7s;*/
+/*    color: white;*/
+/*}*/
+
+/*.page__user{*/
+/*    margin: 0;*/
+/*}*/
+
+/*.page__settings{*/
+/*    display: none;*/
+/*    margin: 0;*/
+/*}*/
+
+
+.pages {
+    margin: 0;
+    display: flex;
+    width: 200%;
+    box-sizing: border-box;
+
+    /*width: 40%;*/
+    /*display: inline-block;*/
+    /*border: 1px solid #213854;*/
+    /*border-radius: 5px 0 0 5px;*/
+    /*!*overflow: auto;*!*/
+    /*!*height: 100%;*!*/
+
+    /*overflow: hidden;*/
+}
+
+.page {
+    margin: 0;
+    width: 50%;
+    /*height: 100vh;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.5s;
+    color: white;
+}
+
+.one{
+    background: orangered;
+}
+
+.two{
+    background-color: dodgerblue;
+}
