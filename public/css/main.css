@@ -93,7 +93,7 @@ input[type=text] {
 
 /*--- USER LIST -----*/
 .left__card{
-    width: 40%;
+    width: 38%;
     display: inline-block;
     border: 1px solid #213854;
     border-radius: 5px 0 0 5px;
@@ -212,7 +212,7 @@ input[type=text] {
 
 /*---- RIGHT CARD -----*/
 .right__card{
-    width: 60%;
+    width: 62%;
     float: right;
     border: 1px solid #213854;
     border-radius: 0 5px 5px 0;
@@ -224,6 +224,14 @@ input[type=text] {
     -webkit-background-size:cover;
     background-size: cover;
     display: none;
+    height: 100vh;
+
+    /*width: 62%;*/
+    /*float: right;*/
+    /*height: 100vh;;*/
+    /*padding: 10px;*/
+    /*background-color: green;*/
+    /*position: relative;*/
 
 }
 
@@ -256,9 +264,16 @@ input[type=text] {
     height: 88vh;
     /*height: 100%;*/
     overflow-y: scroll;
-    /*background-color: red;*/
 
 
+
+    /*width: 100%;*/
+    /*height: 90%;*/
+    /*!*width: 500px;*!*/
+    /*background-color: yellow;*/
+    /*padding: 10px;*/
+    /*display: flex;*/
+    position: relative;
 }
 
 .msg__list__ul{
@@ -332,23 +347,33 @@ input[type=text] {
 
 /*----FORM----*/
 .right__card__form{
-    height:6.5vh;
+    /*height:6.5vh;*/
     width: 100%;
     /*background-color: #e5e7eb;*/
     display: flex;
     align-items: center;
     justify-content: center;
+
+
+
+
+
+    width: 100%;
+    /*background-color: red;*/
+    /*padding: 10px;*/
+    bottom: 10px;
+    position: absolute;
 }
 
 .msg__form{
-    width: 80%;
+    width: 65%;
     display: -webkit-box;
     display: flex;
     display: -ms-flexbox;
     -webkit-box-pack: space-evenly;
     -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
-    position: relative;
+    /*position: relative;*/
     -webkit-box-align: end;
     -ms-flex-align: end;
     align-items: flex-end;
@@ -371,6 +396,9 @@ input[type=text] {
     overflow: hidden;
     background-color: #142C41;
     color: #ffffff;
+    max-height: 150px;
+
+    /*position: absolute;*/
 }
 
 
@@ -407,6 +435,53 @@ input[type=text] {
 }
 
 textarea::placeholder {
+    color: #9ca3af;
+}
+
+/*new*/
+.div__textarea {
+    display: block;
+    min-height: 16px;
+    max-height: 98px;
+    overflow-x: auto;
+    width: calc(100% - 103px);
+    line-height: 16px;
+    padding: 5px;
+    font-size: 16px;
+    float: left;
+    color: #ffffff;
+    outline: none;
+}
+
+.div__textarea::-webkit-scrollbar-track{
+    -webkit-appearance: none;
+    border-radius: 5px;
+}
+
+.div__textarea::-webkit-scrollbar-thumb{
+    -webkit-appearance: none;
+    border-radius: 5px;
+    background: #dedede;
+}
+
+.div__textarea::-webkit-scrollbar{
+    -webkit-appearance: none;
+    width: 5px;
+}
+
+.div__textarea::-webkit-input-placeholder {
+    color: #9ca3af;
+}
+
+.div__textarea:-moz-placeholder { /* Firefox 18- */
+    color: #9ca3af;
+}
+
+.div__textarea::-moz-placeholder {  /* Firefox 19+ */
+    color: #9ca3af;
+}
+
+.div__textarea:-ms-input-placeholder {
     color: #9ca3af;
 }
 

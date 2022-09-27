@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="/css/main.css?v={{ Config::get('app.media_files_version') }}">
     <link rel="stylesheet" href="/css/menu.css?v={{ Config::get('app.media_files_version') }}">
+{{--    <link rel="stylesheet" href="/css/test.scss?v={{ Config::get('app.media_files_version') }}">--}}
+
 </head>
 <body>
 
@@ -75,6 +77,10 @@
 
 
         <input class="js__hash_user" type="hidden" value="{{\Auth()->user()->hash_login_token}}">
+
+
+
+
             <div class="right__card js__right__card">
                <div class="right__card__header">
                 asdasd
@@ -94,8 +100,10 @@
                         @csrf
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23">
                             <path fill="none" fill-rule="evenodd" stroke="#F5F5DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.44 10.05l-9.19 9.19a6.003 6.003 0 1 1-8.49-8.49l9.19-9.19a4.002 4.002 0 0 1 5.66 5.66l-9.2 9.19a2.001 2.001 0 0 1-2.83-2.83l8.49-8.48" transform="translate(1 1)"/></svg>
-                    <textarea class="msg__textarea js__msg__textarea" name="msg_text" id="js__msg__textarea" rows="1" autofocus autocomplete="off" placeholder="Text message"></textarea>
-
+{{--                    <textarea class="msg__textarea js__msg__textarea" name="msg_text" id="js__msg__textarea" rows="1" autofocus autocomplete="off" placeholder="Text message"></textarea>--}}
+                        <div contenteditable="true"
+                             id="message" class="div__textarea js__msg__textarea" data-placeholder="Type ...">
+                        </div>
                         <button type="submit" class="msg__send__btn js__msg__send__btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                             <circle cx="12.5" cy="12.5" r="11.5" stroke="#F5F5DC" stroke-width="2"/>
@@ -104,9 +112,12 @@
                         </button>
                     </form>
                 </div>
-
-
             </div>
+
+
+
+
+
         <div class="right__card__select js__right__card__select">
             Select a chat to start messaging
         </div>

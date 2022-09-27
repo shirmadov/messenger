@@ -12,6 +12,8 @@ function sendMsg(){
         let formData = new FormData(target);
         let url = app_url+'/save_msg';
 
+        console.log('Submit');
+
         formData.append('chosen_id',chosen_id);
         formData.append('chat_type',chat_type);
         const response = await sendData(formData, url);
@@ -120,20 +122,20 @@ function isOpen(ws) {
     return ws.readyState === ws.OPEN;
 }
 
-function formTextarea(){
-    let textarea = document.querySelector('#js__msg__textarea');
-
-    textarea.addEventListener('keydown', async function (e) {
-        if (e.keyCode == 13) {
-            if (e.shiftKey) {
-            } else {
-                document.querySelector('.js__msg__send__btn').click();
-                e.preventDefault();
-            }
-        }
-    });
-
-}
+// function formTextarea(){
+//     let textarea = document.querySelector('#js__msg__textarea');
+//
+//     textarea.addEventListener('keydown', async function (e) {
+//         if (e.keyCode == 13) {
+//             if (e.shiftKey) {
+//             } else {
+//                 document.querySelector('.js__msg__send__btn').click();
+//                 e.preventDefault();
+//             }
+//         }
+//     });
+//
+// }
 
 function clearInput(){
     document.querySelector('.js__msg__textarea').value ='';
@@ -162,14 +164,65 @@ let rightMenuMsg = ()=>{
     });
 }
 
+function textareaForm(){
+    let textarea = document.querySelector('#js__msg__textarea');
+    if(!textarea) return;
+
+    console.log(textarea.style.height);
+    textarea.addEventListener('keydown', async function (e){
+       if( e.keyCode == 13 && !e.shiftKey){
+           e.preventDefault();
+       }else if(e.shiftKey && e.keyCode === 13){
+           console.log(this.style.height);
+           this.style.height = this.scrollHeight + "px";
+       }
+    });
+}
+
+function contentEditable(){
+    const content = document.getElementById('message');
+    const place_text = content.getAttribute('data-placeholder');
+    console.log(place_text,content.innerHTML);
+    content.innerHTML = place_text
+    // content.innerHTML === '' && (content.innerHTML = place_text);
+    content.addEventListener('focus', function (e) {
+        const value = e.target.innerHTML;
+        value === place_text && (e.target.innerHTML = '');
+    });
+
+    content.addEventListener('blur', function (e) {
+        const value = e.target.innerHTML;
+        value === '' && (e.target.innerHTML = place_text);
+    });
+}
+
+function textSubmit(){
+    let textarea = document.querySelector('#message');
+    if(!textarea) return;
+
+    console.log(textarea.style.height);
+    textarea.addEventListener('keydown', async function (e){
+        if( e.keyCode === 13 && !e.shiftKey){
+            e.preventDefault();
+            console.log("Send")
+        }else if(e.shiftKey && e.keyCode === 13){
+            console.log(this.style.height);
+            // this.style.height = this.scrollHeight + "px";
+        }
+    });
+}
+
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
     sendMsg();
-    formTextarea();
+    // formTextarea();
     autoScroll();
     chooseUser();
     rightMenuMsg();
+    textareaForm();
+    contentEditable()
+    textSubmit()
     const csrfToken = document.querySelector('[name=csrf-token]').content;
 
 })
