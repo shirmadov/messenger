@@ -4,32 +4,70 @@ let app_url = location.origin;
 let chosen_id = null;
 let chat_type = 'user_to_user'
 
-function sendMsg(){
+function textSubmit(){
+    let textarea = document.querySelector('#message');
+    if(!textarea) return;
 
-    form.addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        let target = e.target;
-        let formData = new FormData(target);
-        let url = app_url+'/save_msg';
 
-        console.log('Submit');
+    console.log(textarea.style.height);
+    textarea.addEventListener('keydown', async function (e){
+        if( e.keyCode === 13 && !e.shiftKey){
+            e.preventDefault();
+            let formData = new FormData();
+            let url = app_url+'/save_msg';
 
-        formData.append('chosen_id',chosen_id);
-        formData.append('chat_type',chat_type);
-        const response = await sendData(formData, url);
+            console.log('Submit');
 
-        response.success && await showMsg(response.content)
+            let text = document.querySelector('.js__msg__textarea').textContent;
+            console.log(text);
+            formData.append('chosen_id',chosen_id);
+            formData.append('chat_type',chat_type);
+            formData.append('msg_text',text);
+            const response = await sendData(formData, url);
 
-        let data = {
-            data_type:2,    //message
-            hash_tokens:response.hash_tokens,
-            text:response.content.text,
+            response.success && await showMsg(response.content)
+
+            let data = {
+                data_type:2,    //message
+                hash_tokens:response.hash_tokens,
+                text:response.content.text,
+            }
+
+            socket.send(JSON.stringify(data));
+            await clearInput();
+        }else if(e.shiftKey && e.keyCode === 13){
+            console.log(this.style.height);
+            // this.style.height = this.scrollHeight + "px";
         }
-
-        socket.send(JSON.stringify(data));
-        await clearInput();
-    })
+    });
 }
+
+// function sendMsg(){
+//
+//     form.addEventListener('submit', async (e)=>{
+//         e.preventDefault();
+//         let target = e.target;
+//         let formData = new FormData(target);
+//         let url = app_url+'/save_msg';
+//
+//         console.log('Submit');
+//
+//         formData.append('chosen_id',chosen_id);
+//         formData.append('chat_type',chat_type);
+//         const response = await sendData(formData, url);
+//
+//         response.success && await showMsg(response.content)
+//
+//         let data = {
+//             data_type:2,    //message
+//             hash_tokens:response.hash_tokens,
+//             text:response.content.text,
+//         }
+//
+//         socket.send(JSON.stringify(data));
+//         await clearInput();
+//     })
+// }
 
 socket.onmessage = async (event)=>{
     let data = JSON.parse(event.data);
@@ -63,7 +101,7 @@ let showMsg = async (data, author = 1) => {
 function chooseUser(){
     document.addEventListener('click',async function(e){
         const target = e.target;
-        if ((!target.closest('.js__user__li__list')) && (!target.closest('.js__user__li__list'))) return;
+        if (!target.closest('.js__user__li__list')) return;
         let user_li = target.closest('.js__user__li__list');
         let user_id = user_li.querySelector('.js__user__id').value;
         let url = app_url+'/choose_user';
@@ -138,7 +176,7 @@ function isOpen(ws) {
 // }
 
 function clearInput(){
-    document.querySelector('.js__msg__textarea').value ='';
+    document.querySelector('.js__msg__textarea').textContent ='';
 }
 
 
@@ -196,26 +234,12 @@ function contentEditable(){
     });
 }
 
-function textSubmit(){
-    let textarea = document.querySelector('#message');
-    if(!textarea) return;
 
-    console.log(textarea.style.height);
-    textarea.addEventListener('keydown', async function (e){
-        if( e.keyCode === 13 && !e.shiftKey){
-            e.preventDefault();
-            console.log("Send")
-        }else if(e.shiftKey && e.keyCode === 13){
-            console.log(this.style.height);
-            // this.style.height = this.scrollHeight + "px";
-        }
-    });
-}
 
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
-    sendMsg();
+    // sendMsg();
     // formTextarea();
     autoScroll();
     chooseUser();

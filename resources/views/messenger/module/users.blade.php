@@ -2,6 +2,7 @@
     <ul class="user__ul__list">
         @foreach($users as $key=>$user)
             <li class="user__li__list js__user__li__list" data-user-id="<% $user->id %>">
+
                 <div class="user__pr__name">
                     <img class="user__profile" src="@if(\Auth()->user()->id === $user->id) {{asset('img/profile/saved.jpg')}} @else {{asset('img/profile/anton.jpg')}} @endif" alt=""/>
 

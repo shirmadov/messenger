@@ -23,28 +23,9 @@
 <div class="main">
     <div class="container">
 
-{{--        <div class="left__card">--}}
-{{--            <div class="pages">--}}
-{{--                <div class="page one active">--}}
-{{--                    <h1>PAGE 1</h1>--}}
-{{--                    <div>--}}
-{{--                        <button onClick="slide('next')">Next</button>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="page two">--}}
-{{--                    <h1>PAGE 2</h1>--}}
-{{--                    <div>--}}
-{{--                        <button onClick="slide('prev')">Previous</button>--}}
-{{--                        <button onClick="slide('next')">Next</button>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
-
             <div class="left__card js__left__card" >
                 <div class="pages">
-                    <div class="page page__user js__page__user">
+                    <div class="page js__page__user">
                         <div class="search__main">
                             <div class="hamburger__menu js__hamburger__menu">
                                 <svg class="icon__hamburg" xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
@@ -55,11 +36,10 @@
                             </div>
                             <input class="search__stick" type="text" placeholder="Search">
                         </div>
-
                         @include('messenger.module.menu')
                         @include('messenger.module.users')
                     </div>
-                    <div class="page page__settings js__page__settings">
+                    <div class="page js__page__settings">
                         <div class="st__header">
                             <div class="back__to__menu js__back__to__menu" onClick="slide('prev')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
