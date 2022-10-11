@@ -1,21 +1,27 @@
 
 @foreach($messages as $message)
-<li class="msg__list__li">
+<li class="msg__list__li js__msg__list__li" id="js__msg__list__li" data-context="false">
 
     <div class="@if($message->author_id === \Auth()->user()->id) msg__card__right @else msg__card__left @endif js__msg__card">
         <input class="js__msg__id" type="hidden" value="{{$message->id}}">
-        {{--                                        <pre class="msg__text">--}}
-        {{--                                           --}}
-        {{--                                        </pre>--}}
         {{$message->text}}
         <span class="msg__time">
                                         {{date('H:i',strtotime($message->created_at))}}
                                     </span>
+
     </div>
+
 </li>
 @endforeach
 
+<div class="msg__right__menu js__msg__right__menu">
+    <span class="msg__right__menu__list">Reply</span>
+    <span class="msg__right__menu__list">Copy</span>
+    <span class="msg__right__menu__list">Forward</span>
+    <span class="msg__right__menu__list">Select</span>
+    <span class="msg__right__menu__list">Delete</span>
 
+</div>
 
 {{--<li class="msg__list__li">--}}
 {{--    <div class="msg__card__left">--}}

@@ -315,6 +315,32 @@ input[type=text] {
     display: block;
 }
 
+/* RIght Menu */
+.msg__right__menu{
+    position: fixed;
+    z-index: 10000;
+
+
+    width: fit-content;
+    background-color:#1A364F ;
+    border-radius: 5px;
+    padding: 10px;
+    color: #ffffff;
+    display: none;
+}
+
+.msg__right__menu__list{
+    display: block;
+    border-radius: 5px;
+    padding: 7px 10px;
+    transition-duration:0.2s ;
+}
+
+.msg__right__menu__list:hover{
+    background-color:#234564 ;
+    cursor: pointer;
+}
+
 
 /*----FORM----*/
 .right__card__form{

@@ -192,15 +192,7 @@ function autoScroll(){
     getdiv.scrollTop = getdiv.scrollHeight - getdiv.clientHeight;
 }
 
-let rightMenuMsg = ()=>{
-    document.addEventListener('contextmenu',async (e)=>{
-        const target = e.target;
-        if ((!target.closest('.js__msg__card'))) return;
-        target.addEventListener("contextmenu", e => e.preventDefault());
 
-        console.log("Right Menu")
-    });
-}
 
 function textareaForm(){
     let textarea = document.querySelector('#js__msg__textarea');
@@ -243,7 +235,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     // formTextarea();
     autoScroll();
     chooseUser();
-    rightMenuMsg();
+
     textareaForm();
     contentEditable()
     textSubmit()
