@@ -1,0 +1,255 @@
+/* Hamburger Menu */
+.hamburger__menu{
+    float: left;
+    margin-top: -3px;
+    margin-right:10px ;
+    cursor: pointer;
+    padding: 10px 7px 7px 7px;
+    transition: 0.2s;
+    border-radius: 50%;
+
+}
+
+.hamburger__menu:hover{
+
+    backdrop-filter: blur(6px);
+    background-color: #1A364F;
+
+}
+
+.hm__menu__card{
+    /*padding: 10px;*/
+    border-radius:5px;
+    position: fixed;
+    margin-left: 10px;
+    background-color: #1A364F;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: none;
+    transition-duration: 0.2s;
+    transition-delay: 1s;
+}
+
+.hm__menu__card ul{
+    padding: 5px 10px;
+    list-style: none;
+    display: block;
+}
+
+.hm__menu__card ul li{
+    padding: 7px 10px;
+    border-radius: 5px;
+    /*margin: 5px;*/
+    color: #F5F5DC;
+    cursor: pointer;
+    transition-duration:0.2s ;
+}
+
+.hm__menu__card ul li:hover{
+    background-color:#234564 ;
+}
+
+.hm__menu_names{
+    margin-left: 10px;
+    margin-top: 4px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    float: right;
+    margin-left: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(12px);
+    -ms-transform: translateX(12px);
+    transform: translateX(12px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/* PROFILE SETTINGS */
+.page__st{
+    margin: 10px 20px 10px 20px;
+    background-color:#142233 ;
+    /*padding: 5px 0;*/
+    border-radius: 5px;
+    /*margin: 10px;*/
+}
+
+
+
+.page__st__profile__picture{
+    text-align: center;
+    /*background-color: red;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+
+.profile__picture{
+
+    border-radius: 50%;
+    display: flex;
+    background-color: #4BC87E;
+    height: 150px;
+    width: 150px;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+}
+
+
+.profile__text{
+    opacity: 0.6;
+    font-size: 36px;
+}
+
+.page__camera__icon{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    fill: white;
+    margin-right: 7px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+
+.page__st__profile__form{
+    /*background-color: #2563eb;*/
+    margin: 20px;
+    padding-bottom: 5px;
+}
+
+.profile__form{
+    margin: 10px 0;
+}
+
+.profile__form__label{
+    /*margin-bottom: 5px;*/
+    /*font-weight: lighter;*/
+    font-weight: 300;
+    font-size: 16px;
+    color: #80ced6;
+}
+
+.profile__form__input{
+    background-color: #142233;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 18px;
+}
+
+.profile__form__input[type=text] {
+    width: 90%;
+    /*padding: 10px 0;*/
+    padding: 0;
+    margin-top:12px ;
+    box-sizing: border-box;
+    line-height: 16px;
+    color: #ffffff;
+}
+
+.profile__form__underline{
+    background-color: #80ced6;
+    display: inline-block;
+    height: 1px;
+    -webkit-transform: scale(0,1);
+    transform: scale(0,1);
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.2s linear;
+    width: 90%;
+
+}
+
+.page__st__list__ul{
+
+    margin: 0;
+    list-style: none;
+    padding: 5px;
+}
+
+.page__st__list__li{
+    padding: 0 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration:0.2s ;
+
+    /*background-color: #4BC87E;*/
+    height: 40px;
+    line-height: 40px;
+}
+
+.page__st__list__li:hover{
+    background-color: #234564;
+}
+
+.page__st__list__icon{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.page__st__list__name{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+

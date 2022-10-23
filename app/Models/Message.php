@@ -15,13 +15,15 @@ class Message extends Model
         'read',
     ];
 
-    public function saveMsg($text, $chat_list_id){
+    public function saveMsg($text, $chat_list_id, $chosen_user_id){
         $user = \Auth()->user();
         $message = new Message;
 
         $users_unread = array(
-            1=>false,
+            $chosen_user_id=>false,
         );
+
+//        dd($users_unread);
 
         $message->chat_list_id  = $chat_list_id;
         $message->text          = $text;
