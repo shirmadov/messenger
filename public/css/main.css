@@ -485,7 +485,7 @@ textarea::placeholder {
     display: flex;
 }
 
-.back__to__menu{
+.st__header__back{
     float: left;
     /*margin-top: 5px;*/
     margin-right:10px ;
@@ -493,11 +493,17 @@ textarea::placeholder {
     padding: 8px 8px 5px 8px;
     transition: 0.2s;
     border-radius: 50%;
+    /*width: 20%;*/
 }
 
-.back__to__menu:hover{
+.st__header__back:hover{
     backdrop-filter: blur(6px);
     background-color: #1A364F;
+}
+
+.st__header__title{
+    width: 85%;
+    margin: auto 0;
 }
 
 .st__header__name{
@@ -505,6 +511,36 @@ textarea::placeholder {
     display: inline-block;
     margin: auto 20px;
     font-size: 18px;
+}
+
+.st__header__edit{
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 50%;
+    margin:10px 10px 0 0 ;
+    float: right;
+    padding: 8px 8px 5px 8px;
+
+}
+
+.st__header__save{
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 50%;
+    margin:10px 10px 0 0 ;
+    float: right;
+    padding: 8px 8px 5px 8px;
+    display: none;
+}
+
+.st__header__edit:hover{
+    backdrop-filter: blur(6px);
+    background-color: #1A364F;
+}
+
+.st__header__save:hover{
+    backdrop-filter: blur(6px);
+    background-color: #1A364F;
 }
 
 
