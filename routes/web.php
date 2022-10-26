@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/messenger',[MessengerController::class,'index'])->name('messenger')->middleware(['auth']);
 Route::post('/save_msg',[MessengerController::class,'store'])->name('save_msg')->middleware(['auth']);
 Route::post('/choose_user',[MessengerController::class,'choose'])->name('choose_user')->middleware(['auth']);
+Route::post('/choose_me',[MessengerController::class,'choose'])->name('choose_user')->middleware(['auth']);
 Route::get('/test',[MessengerController::class,'test']);
 
 

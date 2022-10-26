@@ -3,7 +3,8 @@
     {{--                    <span>Contacts</span>--}}
     {{--                    <span>Settings</span>--}}
     <ul class="hm__menu__list__ul">
-        <li>
+        <li class="js__saved__msg" data-user-id="<% \Auth()->user()->id; %>">
+            <input class="js__user__id" type="text" hidden value="{{\Auth()->user()->id}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                  fill="none">
                 <path

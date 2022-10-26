@@ -166,21 +166,40 @@
                             @if(isset($messages))
                             @include('messenger.module.messages')
                             @endif
+{{--                                @include('messenger.module.messages')--}}
                         </ul>
 
                     </div>
                 </div>
                 <div class="right__card__form">
+                    <div class="msg__reply js__msg__reply">
+                        <div class="msg__reply__border"></div>
+                       <div class="msg__reply__inf">
+                           <div class="" style="margin-bottom: 3px">
+                               <span class="msg__reply__author js__msg__reply__author">Sapa Shirmadov</span>
+                           </div>
+                           <div>
+                               <span class="msg__reply__text js__msg__reply__text">Hello. I am fine. And you?</span>
+                           </div>
+                       </div>
+                        <div class="msg__reply__cros js__msg__reply__cros" onclick="cros()" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M18 6L6 18" stroke="#778899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6 6L18 18" stroke="#778899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                    </div>
                     <form id="msg__form" class="msg__form" action="">
                         @csrf
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23">
+
+                        <svg style="cursor: pointer" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 23">
                             <path fill="none" fill-rule="evenodd" stroke="#F5F5DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.44 10.05l-9.19 9.19a6.003 6.003 0 1 1-8.49-8.49l9.19-9.19a4.002 4.002 0 0 1 5.66 5.66l-9.2 9.19a2.001 2.001 0 0 1-2.83-2.83l8.49-8.48" transform="translate(1 1)"/></svg>
-{{--                    <textarea class="msg__textarea js__msg__textarea" name="msg_text" id="js__msg__textarea" rows="1" autofocus autocomplete="off" placeholder="Text message"></textarea>--}}
                         <div contenteditable="true"
                              id="message" class="div__textarea js__msg__textarea" data-placeholder="Type ...">
                         </div>
                         <button type="submit" class="msg__send__btn js__msg__send__btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <svg style="cursor:pointer;" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 25 25" fill="none">
                             <circle cx="12.5" cy="12.5" r="11.5" stroke="#F5F5DC" stroke-width="2"/>
                             <path d="M13.7071 6.29289C13.3166 5.90237 12.6834 5.90237 12.2929 6.29289L5.92893 12.6569C5.53841 13.0474 5.53841 13.6805 5.92893 14.0711C6.31946 14.4616 6.95262 14.4616 7.34315 14.0711L13 8.41421L18.6569 14.0711C19.0474 14.4616 19.6805 14.4616 20.0711 14.0711C20.4616 13.6805 20.4616 13.0474 20.0711 12.6569L13.7071 6.29289ZM14 19V7H12V19H14Z" fill="#F5F5DC"/>
                         </svg>
@@ -188,10 +207,6 @@
                     </form>
                 </div>
             </div>
-
-
-
-
 
         <div class="right__card__select js__right__card__select">
             Select a chat to start messaging

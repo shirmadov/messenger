@@ -15,69 +15,23 @@ let hamburgerMenu = ()=>{
             menu_status = true;
         }
     })
-
-    // document.querySelector('.js__hm__menu__st').addEventListener('click',(e)=>{
-    //     document.querySelector('.js__page__user').style.display="none";
-    //     document.querySelector('.js__page__settings').style.display="inline-block";
-    // })
-    //
-    // document.querySelector('.js__back__to__menu').addEventListener('click', (e)=>{
-    //     document.querySelector('.js__page__user').style.display="block";
-    //     document.querySelector('.js__page__settings').style.display="none";
-    // })
 }
 
-
-
-let rightMenuMsg = ()=>{
-
-    // document.querySelector('.js__msg__list__ul').oncontextmenu = (e)=>{
-    //     e.preventDefault();
-    //
-    // };
-
-
-
-
-    // document.addEventListener('contextmenu',async (e)=>{
-    //     console.log(e.clientX, e.clientY);
-    //
-    //     const target = e.target;
-    //     // target.addEventListener("contextmenu", (e )=> {return false});
-    //     // target.oncontextmenu = function(){
-    //     //     return false;
-    //     // };
-    //
-    //
-    //
-    //     if ((!target.closest('.js__msg__list__li'))) return;
-    //
-    //     let context_menu = document.querySelector('.js__msg__right__menu');
-    //     if(o_c_ch === false){
-    //         context_menu.style.top = e.clientY>720?`${720}px`: `${e.clientY}px`;
-    //         context_menu.style.left = `${e.clientX}px`;
-    //         context_menu.style.display = 'block';
-    //         o_c_ch = true;
-    //         console.log("Menu height:",context_menu.offsetHeight);
-    //
-    //     }else{
-    //         target.closest('.js__msg__list__ul').oncontextmenu = (e)=>{
-    //             return true;
-    //         }
-    //         context_menu.style.display = 'none';
-    //         o_c_ch = false;
-    //     }
-    //
-    //
-    // });
-}
 let o_c_ch = false;
+
+let msg_inf = {
+    'msg_author':'',
+    'msg_text':'',
+    'msg_id':''
+};
 oncontextmenu = (e)=>{
 
     let target = e.target;
     if ((!target.closest('.js__msg__list__li'))) return;
 
-
+    msg_inf.msg_author = target.closest('.js__msg__list__li').querySelector('.js__msg__author').value;
+    msg_inf.msg_text =target.closest('.js__msg__list__li').querySelector('.js__msg__text').value;
+    msg_inf.msg_id =target.closest('.js__msg__list__li').querySelector('.js__msg__id').value;
     let context_menu = document.querySelector('.js__msg__right__menu');
     if(o_c_ch === false){
         console.log("OPen")
@@ -94,19 +48,6 @@ oncontextmenu = (e)=>{
     }
 }
 
-
-function myFunc(){
-    // if(o_c_ch ===  false){
-    //     return false;
-    // }else{
-    //     return true;
-    // }
-
-    console.log("Came")
-    return false;
-
-
-}
 
 let closeMenu = (e)=>{
     const target = e.target;
@@ -182,16 +123,30 @@ function saveSt(){
 
 }
 
+function reply(){
+    console.log(msg_inf);
+    let test = document.querySelector('.js__msg__reply');
+    console.log(test);
+    document.querySelector('.js__msg__reply').style.display='block';
+    document.querySelector('.js__msg__reply__author').innerText = msg_inf.msg_author;
+    document.querySelector('.js__msg__reply__text').innerText = msg_inf.msg_text.substring(0,40);
 
+}
+
+function cros(){
+    document.querySelector('.js__msg__reply').style.display='none';
+}
+
+
+// let reply = ()=>{
+//
+// }
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
-    // editSt();
+    // reply()
     hamburgerMenu();
-    rightMenuMsg();
     clickAnywhere();
-
-
     const csrfToken = document.querySelector('[name=csrf-token]').content;
 
 })

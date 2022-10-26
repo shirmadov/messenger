@@ -110,15 +110,30 @@ function chooseUser(){
         formData.append('user_id', user_id);
 
         let response = await sendData(formData, url);
-
-        if(response.success == true){
-            await changeRightCard()
-
-            document.querySelector('.js__msg__list__ul').innerHTML = response.content;
-            await autoScroll();
-        }
-
+        await showRes(response);
     });
+}
+
+function chooseMe(){
+   document.querySelector('.js__saved__msg').addEventListener('click',async(e)=>{
+        let user_id = document.querySelector('.js__user__id').value;
+       let url = app_url+'/choose_user';
+       let formData = new FormData;
+       chosen_id = user_id;
+       formData.append('user_id', user_id);
+
+       let response = await sendData(formData, url);
+       await showRes(response);
+    });
+}
+
+async function showRes(response){
+    if(response.success == true){
+        await changeRightCard()
+
+        document.querySelector('.js__msg__list__ul').innerHTML = response.content;
+        await autoScroll();
+    }
 }
 
 const sendData = async (formData, url)=>{
@@ -230,6 +245,9 @@ function contentEditable(){
 
 
 
+
+
+
 document.addEventListener("DOMContentLoaded", ()=>{
     // sendMsg();
     // formTextarea();
@@ -237,8 +255,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
     chooseUser();
 
     textareaForm();
-    contentEditable()
-    textSubmit()
+    contentEditable();
+    textSubmit();
+    chooseMe();
     const csrfToken = document.querySelector('[name=csrf-token]').content;
 
 })

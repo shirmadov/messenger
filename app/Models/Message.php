@@ -39,7 +39,11 @@ class Message extends Model
     }
 
     public function getMsg($chat_list_id){
-        $msg = $this->where('chat_list_id',$chat_list_id)->get();
+        $msg = \DB::table('messages')->where('chat_list_id',$chat_list_id)
+            ->join('users','messages.author_id','=','users.id')
+            ->select('messages.*','users.name as author_name')
+            ->get();
+
 
         return $msg;
     }

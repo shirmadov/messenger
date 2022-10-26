@@ -327,6 +327,8 @@ input[type=text] {
     padding: 10px;
     color: #ffffff;
     display: none;
+    font-size: 14px;
+    line-height: 1;
 }
 
 .msg__right__menu__list{
@@ -344,16 +346,59 @@ input[type=text] {
 
 /*----FORM----*/
 .right__card__form{
-    width: 100%;
-    display: flex;
+    width: 60%;
+    display: block;
     align-items: center;
     justify-content: center;
     bottom: 10px;
     position: absolute;
+
+    background-color: #142C41;
+    border-radius:5px;
+    left: 50%;
+    transform: translate(-50%);
 }
 
+.msg__reply{
+    margin: 2px 4px 0 45px;
+    padding: 10px;
+    position: relative;
+    display: none;
+}
+
+.msg__reply__border{
+    height: 30px;
+    width: 2px;
+    display: inline-block;
+    content: '';
+    background-color:#0781F1 ;
+    border-radius: 5px;
+}
+
+.msg__reply__inf{
+    display: inline-block;
+    font-size: 16px;
+    /*width: 92%;*/
+}
+
+.msg__reply__author{
+    color:#0781F1;
+    margin-bottom: 3px;
+}
+
+.msg__reply__text{
+    color:#778899 ;
+}
+
+.msg__reply__cros{
+    float: right;
+    cursor: pointer;
+}
+
+
 .msg__form{
-    width: 65%;
+    width: 100%;
+    /*width: 65%;*/
     display: -webkit-box;
     display: flex;
     display: -ms-flexbox;
@@ -365,9 +410,9 @@ input[type=text] {
     -ms-flex-align: end;
     align-items: flex-end;
 
-    background-color: #142C41;
-    padding: 10px 10px;
-    border-radius: 5px;
+    /*background-color: #142C41;*/
+    padding: 7px 0;
+    /*border-radius: 5px;*/
 }
 
 .msg__textarea{
