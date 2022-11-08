@@ -1,29 +1,63 @@
 
 @foreach($messages as $message)
-<li class="msg__list__li js__msg__list__li" id="js__msg__list__li" data-context="false" data-msg-id="{{$message->id}}">
-
-    <input type="text" class="js__msg__author" hidden value="{{$message->author_name}}">
-    <input type="text" class="js__msg__text" hidden value="{{$message->text}}">
-    <input type="text" class="js__msg__id" hidden value="{{$message->id}}">
-    <div
-        class="@if($message->author_id === \Auth()->user()->id) msg__card__right @else msg__card__left @endif js__msg__card">
-
-        {{$message->text}}
-        <span class="msg__time">
-                                        {{date('H:i',strtotime($message->created_at))}}
-                                    </span>
-    </div>
-    <div class="msg__right__menu js__msg__right__menu" data-msg-id="{{$message->id}}">
-        <span class="msg__right__menu__list" onclick="reply()">Reply</span>
-        <span class="msg__right__menu__list">Copy</span>
-        <span class="msg__right__menu__list">Forward</span>
-        <span class="msg__right__menu__list">Select</span>
-        <span class="msg__right__menu__list" style="color:#F15135;">Delete</span>
-
-    </div>
-</li>
+    @include('messenger.module.message')
 @endforeach
 
+
+
+
+{{--<li class="msg__list__li js__msg__list__li" id="js__msg__list__li" data-context="false">--}}
+
+{{--    <div--}}
+{{--        class="msg__card__left js__msg__card">--}}
+
+{{--        <div class="reply__msg__main" style="padding: 0; margin: 0">--}}
+{{--                        <div class="reply__msg__border"></div>--}}
+{{--            <div class="reply__msg__inf">--}}
+{{--                <span class="reply__msg__author">Sapa Shirmadov</span>--}}
+{{--                <div class="reply__msg__text">--}}
+{{--                    Ipsum Lorem is simply dummy text of the--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--        </div>--}}
+
+{{--        <div class="" style="padding: 0; margin: 0">--}}
+{{--            Lorem Ipsum is simply dummy text of the--}}
+{{--        </div>--}}
+{{--        <span class="msg__time">--}}
+{{--                                        15:20--}}
+{{--                                    </span>--}}
+{{--    </div>--}}
+
+{{--</li>--}}
+
+{{--<li class="msg__list__li js__msg__list__li" id="js__msg__list__li" data-context="false">--}}
+
+{{--    <div--}}
+{{--        class="msg__card__right js__msg__card">--}}
+{{--        <div class="reply__msg__main" style="padding: 0; margin: 0">--}}
+{{--            <div class="reply__msg__border"></div>--}}
+{{--            <div class="reply__msg__inf">--}}
+{{--                <span class="reply__msg__author">Sapa Shirmadov</span>--}}
+{{--                <div class="reply__msg__text">--}}
+{{--                    Ipsum Lorem is simply dummy text of the--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--        </div>--}}
+
+{{--        <div class="" style="padding: 0; margin: 0">--}}
+{{--        Lorem Ipsum is simply dummy text of the--}}
+{{--        </div>--}}
+
+{{--         Lorem Ipsum is simply dummy text of the--}}
+{{--        <span class="msg__time">--}}
+{{--                                        15:20--}}
+{{--                                    </span>--}}
+{{--    </div>--}}
+
+{{--</li>--}}
 
 
 {{--<li class="msg__list__li">--}}

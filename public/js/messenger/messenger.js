@@ -2,98 +2,75 @@ let form = document.querySelector("#msg__form");
 const socket = new WebSocket('ws://localhost:8000');
 let app_url = location.origin;
 let chosen_id = null;
-let chat_type = 'user_to_user'
+let chat_type = 'user_to_user';
+
+
+let o_c_ch = false;
+
+let msg_inf = {
+    'msg_author':'',
+    'msg_text':'',
+    'msg_id':''
+};
 
 function textSubmit(){
     let textarea = document.querySelector('#message');
     if(!textarea) return;
 
-
-    console.log(textarea.style.height);
     textarea.addEventListener('keydown', async function (e){
         if( e.keyCode === 13 && !e.shiftKey){
             e.preventDefault();
             let formData = new FormData();
             let url = app_url+'/save_msg';
-
-            console.log('Submit');
-
             let text = document.querySelector('.js__msg__textarea').textContent;
-            console.log(text);
+
             formData.append('chosen_id',chosen_id);
             formData.append('chat_type',chat_type);
             formData.append('msg_text',text);
+            formData.append('msg_reply_id',msg_inf.msg_id);
+
             const response = await sendData(formData, url);
-
             response.success && await showMsg(response.content)
-
+            console.log("Res",response)
             let data = {
                 data_type:2,    //message
                 hash_tokens:response.hash_tokens,
-                text:response.content.text,
+                // text:response.content.text,
+                id:response.content.id,
             }
 
             socket.send(JSON.stringify(data));
             await clearInput();
+            await cros();
+
         }else if(e.shiftKey && e.keyCode === 13){
-            console.log(this.style.height);
-            // this.style.height = this.scrollHeight + "px";
         }
     });
 }
 
-// function sendMsg(){
-//
-//     form.addEventListener('submit', async (e)=>{
-//         e.preventDefault();
-//         let target = e.target;
-//         let formData = new FormData(target);
-//         let url = app_url+'/save_msg';
-//
-//         console.log('Submit');
-//
-//         formData.append('chosen_id',chosen_id);
-//         formData.append('chat_type',chat_type);
-//         const response = await sendData(formData, url);
-//
-//         response.success && await showMsg(response.content)
-//
-//         let data = {
-//             data_type:2,    //message
-//             hash_tokens:response.hash_tokens,
-//             text:response.content.text,
-//         }
-//
-//         socket.send(JSON.stringify(data));
-//         await clearInput();
-//     })
-// }
 
 socket.onmessage = async (event)=>{
     let data = JSON.parse(event.data);
-    await showMsg(data,2);
+    await showMsg(data);
 }
 
-let showMsg = async (data, author = 1) => {
+let showMsg = async (data) => {
 
-    if(chosen_id !== null){
-        const d = new Date();
-        let h = d.getHours();
-        let m = d.getMinutes();
-        let right_left = author === 1?"msg__card__right":"msg__card__left";
-        let html = '<li class="msg__list__li js__msg__list__li">\n' +
-            '<div class="'+right_left+'">\n' + data.text +
-            '<span class="msg__time">'
-            + h +':'+ m +
-            '</span>\n' +
-            '</div>\n' +
-            '</li>'
+    if(chosen_id !==null){
+        console.log("Came");
+        let formData = new FormData;
+        let url = app_url+'/get_msg';
+        formData.append('msg_id',data.id);
 
-        document.querySelector('.js__msg__list__ul').insertAdjacentHTML('beforeend',html);
-        await autoScroll();
-    }else{
+        let response = await sendData(formData,url)
+        if(response.success === true){
+            document.querySelector('.js__msg__list__ul').insertAdjacentHTML('beforeend',response.content)
+            await autoScroll();
+        }
+
 
     }
+
 
 }
 
@@ -129,6 +106,7 @@ function chooseMe(){
 
 async function showRes(response){
     if(response.success == true){
+        console.log("Res")
         await changeRightCard()
 
         document.querySelector('.js__msg__list__ul').innerHTML = response.content;
@@ -150,7 +128,7 @@ const sendData = async (formData, url)=>{
             body:formData
         })
             .then(res=>res.json());
-
+        console.log(response.success);
         return response;
     }catch(error){
         console.log('Error:', error);
@@ -175,26 +153,56 @@ function isOpen(ws) {
     return ws.readyState === ws.OPEN;
 }
 
-// function formTextarea(){
-//     let textarea = document.querySelector('#js__msg__textarea');
-//
-//     textarea.addEventListener('keydown', async function (e) {
-//         if (e.keyCode == 13) {
-//             if (e.shiftKey) {
-//             } else {
-//                 document.querySelector('.js__msg__send__btn').click();
-//                 e.preventDefault();
-//             }
-//         }
-//     });
-//
-// }
+/**
+ * Context Menu
+ * @param e
+ */
+oncontextmenu = (e)=>{
+    let target = e.target;
+    if ((!target.closest('.js__msg__list__li'))) return;
 
-function clearInput(){
-    document.querySelector('.js__msg__textarea').textContent ='';
+    msg_inf.msg_author = target.closest('.js__msg__list__li').querySelector('.js__msg__author').value;
+    msg_inf.msg_text =target.closest('.js__msg__list__li').querySelector('.js__msg__text').value;
+    msg_inf.msg_id =target.closest('.js__msg__list__li').querySelector('.js__msg__id').value;
+    let context_menu = document.querySelector('.js__msg__right__menu');
+    if(o_c_ch === false){
+        console.log("OPen")
+        e.preventDefault();
+        context_menu.style.top = e.clientY>720?`${720}px`: `${e.clientY}px`;
+        context_menu.style.left = `${e.clientX}px`;
+        context_menu.style.display = 'block';
+        o_c_ch = true;
+    }else{
+        // console.log("Close")
+        context_menu.style.display = 'none';
+        o_c_ch = false;
+        // closeMenu(e);
+    }
 }
 
 
+
+function clearInput(){
+    document.querySelector('.js__msg__textarea').textContent ='';
+
+    msg_inf.msg_id = '';
+    msg_inf.msg_author = '';
+    msg_inf.msg_text = '';
+}
+
+let closeContextMenu = (e)=>{
+    const target = e.target;
+    if (target.closest('.js__hamburger__menu') || target.closest('.js__hm__menu__card') || target.closest('.js__msg__right__menu')) return;
+    if(menu_status == true){
+        document.querySelector('.js__hm__menu__card').style.display = 'none';
+        menu_status = false;
+    }
+}
+
+let clickAnywhere = ()=>{
+    document.addEventListener('click', closeMenu, false)
+    document.addEventListener('contextmenu', closeContextMenu, false)
+}
 
 let changeRightCard = function (){
     document.querySelector('.js__right__card').style.display = 'block';
@@ -242,15 +250,53 @@ function contentEditable(){
 }
 
 
+function replyMsg(){
+    console.log(msg_inf);
+    let test = document.querySelector('.js__msg__reply');
+    console.log(test);
+    document.querySelector('.js__msg__reply').style.display='block';
+    document.querySelector('.js__msg__reply__author').innerText = msg_inf.msg_author;
+    document.querySelector('.js__msg__reply__text').innerText = msg_inf.msg_text.substring(0,40);
 
+    document.querySelector('.js__msg__right__menu').style.display = 'none';
+    o_c_ch = false;
+}
 
+function cros(){
+    document.querySelector('.js__msg__reply').style.display='none';
+}
 
+function copyMsg(){
+    navigator.clipboard.writeText(msg_inf.msg_text)
+    document.querySelector('.js__msg__right__menu').style.display = 'none';
+    o_c_ch = false;
+}
 
+function deleteMsg(){
+    document.querySelector('.js__msg__rm__card').style.display='block';
+    document.querySelector('.js__msg__right__menu').style.display = 'none';
+    o_c_ch = false;
+}
+
+function cancelDelete(){
+
+    document.querySelector('.js__msg__rm__card').style.display='none';
+    // document.querySelector('.js__msg__right__menu').style.display = 'none';
+    // o_c_ch = false;
+}
+
+async function deleteMsgA(){
+    cancelDelete()
+    let formData = new FormData;
+    let url = app_url+'/delete_msg';
+
+    formData.append('msg_id',msg_inf.msg_id);
+    let response = await sendData(formData, url);
+    await showRes(response)
+}
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
-    // sendMsg();
-    // formTextarea();
     autoScroll();
     chooseUser();
 
@@ -258,6 +304,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     contentEditable();
     textSubmit();
     chooseMe();
+    clickAnywhere();
     const csrfToken = document.querySelector('[name=csrf-token]').content;
 
 })

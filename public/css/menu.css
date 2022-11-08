@@ -187,7 +187,8 @@ input:checked + .slider:before {
     /*font-weight: lighter;*/
     font-weight: 300;
     font-size: 16px;
-    color: #80ced6;
+    /*color: #80ced6;*/
+    color: #ffffff;
 }
 
 .profile__form__input{
@@ -207,7 +208,8 @@ input:checked + .slider:before {
 }
 
 .profile__form__underline{
-    background-color: #80ced6;
+    /*background-color: #80ced6;*/
+    background-color: #ffffff;
     display: inline-block;
     height: 1px;
     -webkit-transform: scale(0,1);

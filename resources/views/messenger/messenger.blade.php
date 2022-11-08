@@ -211,7 +211,32 @@
         <div class="right__card__select js__right__card__select">
             Select a chat to start messaging
         </div>
+
     </div>
+
+    <div class="msg__rm__card js__msg__rm__card">
+        <div class="msg__rm__text">Are you sure you want to delete this message</div>
+{{--        <form action="" method="POST">--}}
+{{--            <input type="checkbox" name="delete_msg_also"/>--}}
+{{--            <input class="msg__rm__btn" type="submit" value="DELETE">--}}
+{{--        </form>--}}
+        <div class="msg__rm__chk__card">
+{{--            <input class="msg__rm__chk" type="checkbox">--}}
+{{--            <label class="msg__rm__chk__text">Also delete for Sapa Shirmadov</label>--}}
+            <label class="msg__rm__chk__text">
+                <input type="checkbox" class="msg__rm__chk" name="checkbox-checked" checked />
+
+                <span style="margin-top: 0.15em">Also delete for Sapa Shirmadov</span>
+            </label>
+        </div>
+        <div class="msg__rm__btn">
+            <span class="msg__rm__cancel__btn" onclick="cancel()">CANCEL</span>
+            <span class="msg__rm__delete__btn" onclick="deleteMsgA()">DELETE</span>
+        </div>
+    </div>
+
+
+
 </div>
 
 <script src="{{asset('/js/messenger/messenger.js')}}"></script>

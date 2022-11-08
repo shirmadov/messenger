@@ -16,7 +16,7 @@ class UserToUserChat extends Model
         'user_sc_id',
     ];
 
-    public function checkUserToUser($friend_id){
+    public function getChatListId($friend_id){
         $user_id = \Auth()->user()->id;
 
         return UserToUserChat::where([

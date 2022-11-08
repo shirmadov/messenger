@@ -40,4 +40,5 @@ class ChatList extends Model
     }
 
 
+
 }

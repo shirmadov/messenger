@@ -28,13 +28,13 @@ class MessengerController extends Controller
           $hash_tokens = array();
 
         if($request->chat_type === 'user_to_user'){
-            $chat_list_id = $userToUserChat->checkUserToUser($request->chosen_id);
+            $chat_list_id = $userToUserChat->getChatListId($request->chosen_id);
 
             if(is_null($chat_list_id)){
                 $chat_list_id = $chatList->createUserToUser($request->chosen_id);
             }
 
-            $message = $message->saveMsg($request->msg_text, $chat_list_id,$request->chosen_id);
+            $message = $message->saveMsg($request->msg_text, $chat_list_id,$request->chosen_id,$request->msg_reply_id);
 
             $hash_tokens[] = $user->getHashToken($request->chosen_id);
 
@@ -42,12 +42,10 @@ class MessengerController extends Controller
 
         }
 
-
-//        $html = view('messenger.module.messages', compact())->render();
           return response()->json([
               'success'=>true,
               'hash_tokens'=>$hash_tokens,
-              'content'=>$message
+              'content'=>$message //Bu yerde dine msg_id gerekli
           ]);
 
 
@@ -61,13 +59,11 @@ class MessengerController extends Controller
 
       try {
 
-//          dd($request->all());
-          $chat_list_id = $userToUserChat->checkUserToUser($request->user_id);
+          $chat_list_id = $userToUserChat->getChatListId($request->user_id);
           $messages =  $message->getMsg($chat_list_id);
-
+//            dd($messages);
 
           $html = view('messenger.module.messages', compact('messages'))->render();
-
 
           return response()->json(['success'=>true,'content'=>$html]);
 
@@ -79,6 +75,37 @@ class MessengerController extends Controller
 
 
   }
+
+  public function getMsg(Request $request,Message $message){
+
+      try {
+          $message = $message->getLastMsg($request->msg_id);
+
+          $html = view('messenger.module.message', compact('message'))->render();
+
+          return response()->json(['success'=>true,'content'=>$html]);
+
+      }catch(\Exception $e){
+          return $e->getMessage();
+      }
+
+  }
+
+  public function deleteMsg(Request $request,Message $message){
+      try {
+
+            $chat_list_id = $message->getChatListIdByMsg($request->msg_id);
+            $message->removeMsg($request->msg_id);
+            $messages =  $message->getMsg($chat_list_id);
+
+            $html = view('messenger.module.messages', compact('messages'))->render();
+
+            return response()->json(['success'=>true,'content'=>$html]);
+      }catch(\Exception $e){
+          return $e->getMessage();
+      }
+  }
+
 
 
 
