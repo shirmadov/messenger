@@ -23,6 +23,20 @@
 
 @endif
 
+@if(!is_null($message->msg_files))
+    @foreach($message->msg_files as $msg_file)
+    <div class="msg__img__card">
+        <img class="msg__img" class="" id="msg_image"
+             src="{{route('download.file',[$message->chat_list_id,$msg_file->document_path])}}">
+    </div>
+        @endforeach
+{{--        <div class="msg__img__card">--}}
+{{--            <img class="msg__img" class="" id="msg_image"--}}
+{{--                 src="{{route('download.file',[1,'636e4ddfd3696.png'])}}">--}}
+{{--        </div>--}}
+    @endif
+
+
 <div class="" style="padding: 0; margin: 0">
     {{$message->text}}
 </div>

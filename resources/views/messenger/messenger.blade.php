@@ -190,11 +190,15 @@
                         </div>
 
                     </div>
-                    <form id="msg__form" class="msg__form" action="">
+                    <form id="msg__form" class="msg__form" enctype="multipart/form-data">
                         @csrf
 
-                        <svg style="cursor: pointer" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 23">
-                            <path fill="none" fill-rule="evenodd" stroke="#F5F5DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.44 10.05l-9.19 9.19a6.003 6.003 0 1 1-8.49-8.49l9.19-9.19a4.002 4.002 0 0 1 5.66 5.66l-9.2 9.19a2.001 2.001 0 0 1-2.83-2.83l8.49-8.48" transform="translate(1 1)"/></svg>
+                        <input type="file" hidden class="js__msg__file" value="" name="msg_files[]" multiple="multiple" >
+                        <span class="msg__file__count js__msg__file__count">25</span>
+                        <div class="msg__file__icon js__msg__file__icon" onclick="chooseFile()">
+                            <svg style="cursor: pointer" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 23">
+                                <path fill="none" fill-rule="evenodd" stroke="#F5F5DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.44 10.05l-9.19 9.19a6.003 6.003 0 1 1-8.49-8.49l9.19-9.19a4.002 4.002 0 0 1 5.66 5.66l-9.2 9.19a2.001 2.001 0 0 1-2.83-2.83l8.49-8.48" transform="translate(1 1)"/></svg>
+                        </div>
                         <div contenteditable="true"
                              id="message" class="div__textarea js__msg__textarea" data-placeholder="Type ...">
                         </div>
@@ -205,6 +209,11 @@
                         </svg>
                         </button>
                     </form>
+
+{{--                    <div contenteditable="true"--}}
+{{--                         id="message" class="div__textarea js__msg__textarea" data-placeholder="Type ...">--}}
+{{--                        <button>Send</button>--}}
+{{--                    </div>--}}
                 </div>
             </div>
 
@@ -216,16 +225,9 @@
 
     <div class="msg__rm__card js__msg__rm__card">
         <div class="msg__rm__text">Are you sure you want to delete this message</div>
-{{--        <form action="" method="POST">--}}
-{{--            <input type="checkbox" name="delete_msg_also"/>--}}
-{{--            <input class="msg__rm__btn" type="submit" value="DELETE">--}}
-{{--        </form>--}}
         <div class="msg__rm__chk__card">
-{{--            <input class="msg__rm__chk" type="checkbox">--}}
-{{--            <label class="msg__rm__chk__text">Also delete for Sapa Shirmadov</label>--}}
             <label class="msg__rm__chk__text">
                 <input type="checkbox" class="msg__rm__chk" name="checkbox-checked" checked />
-
                 <span style="margin-top: 0.15em">Also delete for Sapa Shirmadov</span>
             </label>
         </div>

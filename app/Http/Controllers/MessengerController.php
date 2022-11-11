@@ -7,6 +7,7 @@ use App\Models\Message;
 use App\Models\User;
 use App\Models\UserToUserChat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MessengerController extends Controller
 {
@@ -25,7 +26,9 @@ class MessengerController extends Controller
 
       try {
 
+//          dd($request->all());
           $hash_tokens = array();
+          $msg_id = '';
 
         if($request->chat_type === 'user_to_user'){
             $chat_list_id = $userToUserChat->getChatListId($request->chosen_id);
@@ -34,7 +37,7 @@ class MessengerController extends Controller
                 $chat_list_id = $chatList->createUserToUser($request->chosen_id);
             }
 
-            $message = $message->saveMsg($request->msg_text, $chat_list_id,$request->chosen_id,$request->msg_reply_id);
+            $msg_id = $message->saveMsg($request->msg_text, $chat_list_id,$request->chosen_id,$request->msg_reply_id, $request->msg_files);
 
             $hash_tokens[] = $user->getHashToken($request->chosen_id);
 
@@ -42,10 +45,15 @@ class MessengerController extends Controller
 
         }
 
+          $message = $message->getLastMsg($msg_id);
+
+          $html = view('messenger.module.message', compact('message'))->render();
+
           return response()->json([
               'success'=>true,
               'hash_tokens'=>$hash_tokens,
-              'content'=>$message //Bu yerde dine msg_id gerekli
+              'content'=>$html, //Bu yerde dine msg_id gerekli
+              'msg_id'=>$msg_id //Bu yerde dine msg_id gerekli
           ]);
 
 
@@ -58,12 +66,12 @@ class MessengerController extends Controller
   public function choose(Request $request, UserToUserChat $userToUserChat, Message $message){
 
       try {
-
           $chat_list_id = $userToUserChat->getChatListId($request->user_id);
           $messages =  $message->getMsg($chat_list_id);
 //            dd($messages);
 
           $html = view('messenger.module.messages', compact('messages'))->render();
+//          dd($html);
 
           return response()->json(['success'=>true,'content'=>$html]);
 
@@ -105,6 +113,18 @@ class MessengerController extends Controller
           return $e->getMessage();
       }
   }
+
+    public function downloadChatMsgFile($id, $file)
+    {
+//        dd(public_path());
+        return response()->download(base_path() . '\storage\app\public\files\chat\1\636e4ddfd3696.png');
+    }
+
+    public function test(){
+        $url = Storage::url('file.jpg');
+
+
+    }
 
 
 

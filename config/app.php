@@ -2,6 +2,47 @@
 
 return [
 
+    'type_files' =>
+        array(
+            'gif'                   =>'image',
+            'jpeg'                  =>'image',
+            'webp'                  =>'image',
+            'pjpeg'                 =>'image',
+            'png'                   =>'image',
+            'svg+xml'               =>'image',
+            'tiff'                  =>'image',
+            'vnd.microsoft.icon'    =>'image',
+            'vnd.wap.wbmp'          =>'image',
+            'jpg'                   =>'image',
+            'JPG'                   =>'image',
+            'image'                 =>'image',
+            'svg'                   =>'image',
+
+            'pdf'                   =>'document',
+            'xml'                   =>'document',
+            'doc'                   =>'document',
+            'docm'                  =>'document',
+            'docx'                  =>'document',
+            'xls'                   =>'document',
+            'xlsx'                  =>'document',
+            'dot'                   =>'document',
+            'odt'                   =>'document',
+            'rdf'                   =>'document',
+            'rtf'                   =>'document',
+            'txt'                   =>'document',
+            'xps'                   =>'document',
+            'csv'                   =>'document',
+
+            '3gp2'                  => 'video',
+            'm4v'                   => 'video',
+            'mp4'                   => 'video',
+            'mpeg'                  => 'video',
+            'webm'                  => 'video',
+            'asf'                   => 'video',
+            'mpg'                   => 'video',
+            'swf'                   => 'video',
+        ),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

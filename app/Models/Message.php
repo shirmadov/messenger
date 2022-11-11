@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Message extends Model
 {
@@ -16,7 +17,7 @@ class Message extends Model
         'reply_msg_id',
     ];
 
-    public function saveMsg($text, $chat_list_id, $chosen_user_id, $reply_msg_id){
+    public function saveMsg($text, $chat_list_id, $chosen_user_id, $reply_msg_id, $msg_files = null){
         $user = \Auth()->user();
         $message = new Message;
 
@@ -24,7 +25,6 @@ class Message extends Model
             $chosen_user_id=>false,
         );
 
-//        dd($users_unread);
 
         $message->chat_list_id  = $chat_list_id;
         $message->text          = $text;
@@ -34,9 +34,33 @@ class Message extends Model
 
         $message->save();
 
-//        dd($message);
+        if(!is_null($msg_files)){
+            foreach ($msg_files as $msg_file){
 
-        return $message;
+                $filePath = '/files/chat/'.$chat_list_id;
+                $newName = uniqid() . '.'.$msg_file->getClientOriginalExtension();
+                $msg_file->storeAs($filePath, $newName, 'public');
+
+                $message_file = new MessageFile;
+
+                $message_file -> message_id = $message->id;
+                $message_file -> document_name = $msg_file->getClientOriginalName();
+                $message_file -> document_path = $newName;
+                $path_info = pathinfo($message_file->document_path);
+
+
+                if (isset($path_info['extension']) && isset(config('app.type_files')[strtolower($path_info['extension'])]))
+                    $document_type = config('app.type_files')[strtolower($path_info['extension'])];
+                else
+                    $document_type = 'undefined';
+
+                $message_file->document_type = $document_type;
+                $message_file->save();
+            }
+        }
+
+
+        return $message->id;
     }
 
     public function getMsg($chat_list_id){
@@ -47,8 +71,8 @@ class Message extends Model
             ->get();
 
 
-
         $msg->each(function( $item, $key){
+            $item->msg_files = \DB::table('message_files')->where('message_id',$item->id)->get();
            if(!is_null($item->reply_msg_id)){
 //               dd($item->reply_msg_id);
                 $item->reply_msg = $this->where('messages.id',$item->reply_msg_id)
@@ -71,6 +95,8 @@ class Message extends Model
             ->join('users','messages.author_id','=','users.id')
             ->select('messages.*','users.name as author_name')
             ->first();
+
+        $msg->msg_files = \DB::table('message_files')->where('message_id',$msg->id)->get();
 
         if(!is_null($msg->reply_msg_id)){
             $msg->reply_msg = $this->where('messages.id',$msg->reply_msg_id)

@@ -13,6 +13,37 @@ let msg_inf = {
     'msg_id':''
 };
 
+const sendMsg = async () =>{
+    let formData = new FormData();
+    let url = app_url+'/save_msg';
+    let text = document.querySelector('.js__msg__textarea').textContent;
+    let files = document.querySelector('.js__msg__file').files
+
+    formData.append('chosen_id',chosen_id);
+    formData.append('chat_type',chat_type);
+    formData.append('msg_text',text);
+    formData.append('msg_reply_id',msg_inf.msg_id);
+    formData.append('msg_reply_id',msg_inf.msg_id);
+    for(let i = 0; i < files.length; i++){
+        formData.append('msg_files[]',files[i]);
+    }
+
+
+    const response = await sendData(formData, url);
+    await showRes(response,2)
+    let data = {
+        data_type:2,    //message
+        hash_tokens:response.hash_tokens,
+        // text:response.content.text,
+        id:response.msg_id,
+    }
+
+    socket.send(JSON.stringify(data));
+    await clearInput();
+    await cros();
+}
+
+
 function textSubmit(){
     let textarea = document.querySelector('#message');
     if(!textarea) return;
@@ -20,58 +51,44 @@ function textSubmit(){
     textarea.addEventListener('keydown', async function (e){
         if( e.keyCode === 13 && !e.shiftKey){
             e.preventDefault();
-            let formData = new FormData();
-            let url = app_url+'/save_msg';
-            let text = document.querySelector('.js__msg__textarea').textContent;
-
-            formData.append('chosen_id',chosen_id);
-            formData.append('chat_type',chat_type);
-            formData.append('msg_text',text);
-            formData.append('msg_reply_id',msg_inf.msg_id);
-
-            const response = await sendData(formData, url);
-            response.success && await showMsg(response.content)
-            console.log("Res",response)
-            let data = {
-                data_type:2,    //message
-                hash_tokens:response.hash_tokens,
-                // text:response.content.text,
-                id:response.content.id,
-            }
-
-            socket.send(JSON.stringify(data));
-            await clearInput();
-            await cros();
-
-        }else if(e.shiftKey && e.keyCode === 13){
+            sendMsg();
         }
     });
 }
 
+document.querySelector('.js__msg__send__btn').addEventListener('click',(e)=>{
+    e.preventDefault()
+    sendMsg();
+})
 
 socket.onmessage = async (event)=>{
     let data = JSON.parse(event.data);
     await showMsg(data);
 }
 
-let showMsg = async (data) => {
+async function showRes(response, type = 1){
+    if(response.success == true && type === 1){
+        console.log("Res")
+        await changeRightCard()
 
+        document.querySelector('.js__msg__list__ul').innerHTML = response.content;
+        await autoScroll();
+    }else if(response.success === true && type === 2){
+        document.querySelector('.js__msg__list__ul').insertAdjacentHTML('beforeend',response.content)
+        await autoScroll();
+    }
+}
+
+let showMsg = async (data) => {
+    console.log(data);
     if(chosen_id !==null){
-        console.log("Came");
         let formData = new FormData;
         let url = app_url+'/get_msg';
         formData.append('msg_id',data.id);
 
-        let response = await sendData(formData,url)
-        if(response.success === true){
-            document.querySelector('.js__msg__list__ul').insertAdjacentHTML('beforeend',response.content)
-            await autoScroll();
-        }
-
-
+        let response = await sendData(formData,url);
+        await showRes(response, 2)
     }
-
-
 }
 
 
@@ -104,15 +121,7 @@ function chooseMe(){
     });
 }
 
-async function showRes(response){
-    if(response.success == true){
-        console.log("Res")
-        await changeRightCard()
 
-        document.querySelector('.js__msg__list__ul').innerHTML = response.content;
-        await autoScroll();
-    }
-}
 
 const sendData = async (formData, url)=>{
     try {
@@ -217,20 +226,20 @@ function autoScroll(){
 
 
 
-function textareaForm(){
-    let textarea = document.querySelector('#js__msg__textarea');
-    if(!textarea) return;
-
-    console.log(textarea.style.height);
-    textarea.addEventListener('keydown', async function (e){
-       if( e.keyCode == 13 && !e.shiftKey){
-           e.preventDefault();
-       }else if(e.shiftKey && e.keyCode === 13){
-           console.log(this.style.height);
-           this.style.height = this.scrollHeight + "px";
-       }
-    });
-}
+// function textareaForm(){
+//     let textarea = document.querySelector('#js__msg__textarea');
+//     if(!textarea) return;
+//
+//     console.log(textarea.style.height);
+//     textarea.addEventListener('keydown', async function (e){
+//        if( e.keyCode == 13 && !e.shiftKey){
+//            e.preventDefault();
+//        }else if(e.shiftKey && e.keyCode === 13){
+//            console.log(this.style.height);
+//            this.style.height = this.scrollHeight + "px";
+//        }
+//     });
+// }
 
 function contentEditable(){
     const content = document.getElementById('message');
@@ -295,12 +304,31 @@ async function deleteMsgA(){
     await showRes(response)
 }
 
+const chooseFile = async ()=>{
+    clickFile()
+    let file = document.querySelector('.js__msg__file');
+
+    file.onclick = function(){
+        this.files = null;
+    }
+    file.onchange = function () {
+        console.log(this.files.length);
+        let amount_file = document.querySelector('.js__msg__file__count');
+        amount_file.style.display = 'block';
+        amount_file.innerText = this.files.length
+        document.querySelector('.js__msg__textarea').focus();
+
+    };
+}
+
+function clickFile(){
+    document.querySelector('.js__msg__file').click();
+}
+
 
 document.addEventListener("DOMContentLoaded", ()=>{
     autoScroll();
     chooseUser();
-
-    textareaForm();
     contentEditable();
     textSubmit();
     chooseMe();
