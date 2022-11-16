@@ -22,7 +22,7 @@ class Message extends Model
         $message = new Message;
 
         $users_unread = array(
-            $chosen_user_id=>false,
+            'id'.$chosen_user_id=>false,
         );
 
 

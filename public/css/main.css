@@ -271,6 +271,18 @@ input[type=text] {
     float: left;
 }
 
+.user__profile__letter{
+    text-align: center;
+    float: left;
+    display: inline-block;
+    /*background-color: #4BC87E;*/
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    line-height: 3em;
+    vertical-align: middle;
+}
+
 .user__name__text{
     width: 70%;
     /*background-color: #9ca3af;*/

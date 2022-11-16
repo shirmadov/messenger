@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ChatList;
 use App\Models\Message;
 use App\Models\User;
-use App\Models\UserToUserChat;
+use App\Models\UsersChatList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,15 +14,15 @@ class MessengerController extends Controller
 
   public function index(Message $message, User $user){
 
-      $users = User::get();
+      $users = $user->getUsers();
 
-//      dd($users);
 
+//      $users = User::get();
       return view('messenger.messenger', compact('users'));
   }
 
 
-  public function store(Request $request, ChatList $chatList, Message $message, UserToUserChat $userToUserChat, User $user){
+  public function store(Request $request, ChatList $chatList, Message $message, UsersChatList $usersChatList, User $user){
 
       try {
 
@@ -31,7 +31,8 @@ class MessengerController extends Controller
           $msg_id = '';
 
         if($request->chat_type === 'user_to_user'){
-            $chat_list_id = $userToUserChat->getChatListId($request->chosen_id);
+
+            $chat_list_id = $usersChatList->getChatListId($request->chosen_id);
 
             if(is_null($chat_list_id)){
                 $chat_list_id = $chatList->createUserToUser($request->chosen_id);
@@ -63,15 +64,15 @@ class MessengerController extends Controller
 
   }
 
-  public function choose(Request $request, UserToUserChat $userToUserChat, Message $message){
+  public function choose(Request $request, UsersChatList $usersChatList, Message $message){
 
       try {
-          $chat_list_id = $userToUserChat->getChatListId($request->user_id);
+          $chat_list_id = $usersChatList->getChatListId($request->user_id);
+
           $messages =  $message->getMsg($chat_list_id);
-//            dd($messages);
+
 
           $html = view('messenger.module.messages', compact('messages'))->render();
-//          dd($html);
 
           return response()->json(['success'=>true,'content'=>$html]);
 
@@ -114,10 +115,10 @@ class MessengerController extends Controller
       }
   }
 
-    public function downloadChatMsgFile($id, $file)
+    public function downloadChatMsgFile( $id, $file )
     {
-//        dd(public_path());
-        return response()->download(base_path() . '\storage\app\public\files\chat\1\636e4ddfd3696.png');
+//        dd( $id, $file);
+        return response()->download(base_path() . '/storage/app/public/files/chat/'.$id.'/'.$file);
     }
 
     public function test(){

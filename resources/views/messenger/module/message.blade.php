@@ -26,6 +26,7 @@
 @if(!is_null($message->msg_files))
     @foreach($message->msg_files as $msg_file)
     <div class="msg__img__card">
+{{--        @dd($message->chat_list_id,$msg_file->document_path)--}}
         <img class="msg__img" class="" id="msg_image"
              src="{{route('download.file',[$message->chat_list_id,$msg_file->document_path])}}">
     </div>

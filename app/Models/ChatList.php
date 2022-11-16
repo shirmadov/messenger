@@ -29,12 +29,14 @@ class ChatList extends Model
         $user = \Auth()->user();
 
         $chat_list_id = $this->createChat();
-        $user_to_user = new UserToUserChat;
 
-        $user_to_user->chat_list_id = $chat_list_id;
-        $user_to_user->user_fr_id = $user->id;
-        $user_to_user->user_sc_id = $chosen_id;
-        $user_to_user->save();
+        $data = [
+            ['user_id'=>$user->id,'chat_list_id'=>$chat_list_id,'friend_id'=>$chosen_id],
+            ['user_id'=>$chosen_id,'chat_list_id'=>$chat_list_id,'friend_id'=>$user->id],
+
+        ];
+
+        \DB::table('users_chat_list')->insert($data);
 
         return $chat_list_id;
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -47,6 +48,13 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'hash_login_token' => Str::random(25),
+        ]);
+
+        $colors = array('#4BC87E','#4BC87E','#58C84B','#BFC84B','#C89E4B','#C8514B','#4BAAC8','#4B6DC8','#814BC8','#BD4BC8','#C84B72','#C84B4B');
+
+        $profile = Profile::create([
+            'user_id'=>$user->id,
+            'avatar_color'=>$colors[rand(0,11)]
         ]);
 
         event(new Registered($user));

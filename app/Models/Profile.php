@@ -19,6 +19,6 @@ class Profile extends Model
     const WOMAN = 2;
 
     protected $fillable = [
-        'user_id', 'fio', 'phone_number', 'description',
+        'user_id', 'fio','date_birthday', 'phone_number', 'description',
     ];
 }

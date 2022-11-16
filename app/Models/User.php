@@ -48,9 +48,29 @@ class User extends Authenticatable
     }
 
     public function getUsers(){
+
         $user_id = \Auth()->user()->id;
-        dd($user_id);
-//        $user_to_user_chat = UserToUserChat::where('');
+
+        $user_chats = UsersChatList::where('users_chat_list.user_id','=',$user_id)
+            ->join('users','users_chat_list.friend_id','=','users.id')
+            ->join('profiles','users.id','=','profiles.user_id')
+            ->leftJoin('groups','users_chat_list.group_id','=','groups.id')
+//            ->join('messages','users_chat_list.chat_list_id','=','messages.chat_list_id')
+            ->select('users_chat_list.*','users.name','users.id as user_id','profiles.avatar_color as avatar_color')
+            ->get();
+
+        $user_chats->each(function( $item, $key ) use($user_id){
+            $item->notif_count = \DB::table('messages')->where([
+                ['chat_list_id','=',$item->chat_list_id],
+                ['read->id'.$user_id,'=',false]
+            ])->count();
+
+            $item->last_msg = \DB::table('messages')->where('chat_list_id','=',$item->chat_list_id)->orderBy('created_at','desc')->first();
+        });
+
+
+        return $user_chats->sortBy('last_msg->created_at');
+
     }
 
 

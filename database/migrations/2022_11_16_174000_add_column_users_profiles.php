@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnToUserProfile extends Migration
+class AddColumnUsersProfiles extends Migration
 {
     /**
      * Run the migrations.
@@ -19,6 +19,7 @@ class AddColumnToUserProfile extends Migration
 
         Schema::table('profiles', function (Blueprint $table) {
             $table->string('avatar')->nullable()->unique();
+            $table->string('avatar_color')->nullable();
         });
     }
 
@@ -29,8 +30,13 @@ class AddColumnToUserProfile extends Migration
      */
     public function down()
     {
-        Schema::table('user_profile', function (Blueprint $table) {
-            //
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('username');
+        });
+
+        Schema::table('profiles', function (Blueprint $table) {
+            $table->dropColumn('avatar');
+            $table->dropColumn('avatar_color');
         });
     }
 }
