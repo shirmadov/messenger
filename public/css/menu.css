@@ -23,6 +23,7 @@
     position: fixed;
     margin-left: 10px;
     background-color: #1A364F;
+    background-color: #2A3D4C;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: none;
     transition-duration: 0.2s;
@@ -187,7 +188,8 @@ input:checked + .slider:before {
     /*font-weight: lighter;*/
     font-weight: 300;
     font-size: 16px;
-    color: #80ced6;
+    /*color: #80ced6;*/
+    color: #ffffff;
 }
 
 .profile__form__input{
@@ -207,7 +209,8 @@ input:checked + .slider:before {
 }
 
 .profile__form__underline{
-    background-color: #80ced6;
+    /*background-color: #80ced6;*/
+    background-color: #ffffff;
     display: inline-block;
     height: 1px;
     -webkit-transform: scale(0,1);

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessengerTables extends Migration
+class CreateTableMessengers extends Migration
 {
     /**
      * Run the migrations.
@@ -38,9 +38,10 @@ class CreateMessengerTables extends Migration
                 $table->unsignedBigInteger('author_id');
                 $table->longText('text')->nullable();
                 $table->jsonb('read');
+                $table->unsignedBigInteger('reply_msg_id')->nullable();
                 $table->softDeletes();
                 $table->foreign('chat_list_id')->references('id')->on('chat_list')->onDelete('cascade');
-                $table->foreign('author_id')->references('id')->on('users');
+                $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');;
                 $table->timestamps();
             });
         }
@@ -58,28 +59,52 @@ class CreateMessengerTables extends Migration
             });
         }
 
-        if(!Schema::hasTable('user_to_user_chat')){
-            Schema::create('user_to_user_chat', function (Blueprint $table) {
+//        if(!Schema::hasTable('user_to_user_chat')){
+//            Schema::create('user_to_user_chat', function (Blueprint $table) {
+//                $table->id();
+//                $table->unsignedBigInteger('chat_list_id');
+//                $table->integer('user_fr_id');
+//                $table->integer('user_sc_id');
+//                $table->softDeletes();
+//                $table->foreign('chat_list_id')->references('id')->on('chat_list')->onDelete('cascade');
+//                $table->timestamps();
+//            });
+//        }
+
+        if(!Schema::hasTable('users_chat_list')){
+            Schema::create('users_chat_list', function (Blueprint $table) {
                 $table->id();
+                $table->unsignedBigInteger('user_id');
                 $table->unsignedBigInteger('chat_list_id');
-                $table->integer('user_fr_id');
-                $table->integer('user_sc_id');
+                $table->unsignedBigInteger('friend_id')->nullable();
+                $table->unsignedBigInteger('group_id')->nullable();
                 $table->softDeletes();
                 $table->foreign('chat_list_id')->references('id')->on('chat_list')->onDelete('cascade');
                 $table->timestamps();
             });
         }
 
-        if(!Schema::hasTable('group_chat')){
-            Schema::create('group_chat', function (Blueprint $table) {
+//        if(!Schema::hasTable('group_chat')){
+//            Schema::create('group_chat', function (Blueprint $table) {
+//                $table->id();
+//                $table->unsignedBigInteger('chat_list_id');
+//                $table->integer('user_id');
+//                $table->softDeletes();
+//                $table->foreign('chat_list_id')->references('id')->on('chat_list')->onDelete('cascade');
+//                $table->timestamps();
+//            });
+//        }
+        if(!Schema::hasTable('groups')){
+            Schema::create('groups', function (Blueprint $table) {
                 $table->id();
-                $table->unsignedBigInteger('chat_list_id');
-                $table->integer('user_id');
-                $table->softDeletes();
-                $table->foreign('chat_list_id')->references('id')->on('chat_list')->onDelete('cascade');
+                $table->string('group_name');
+                $table->string('group_profile_path')->nullable();
+                $table->string('group_description')->nullable();
                 $table->timestamps();
             });
         }
+
+
     }
 
     /**
@@ -93,7 +118,7 @@ class CreateMessengerTables extends Migration
         Schema::dropIfExists('chat_list');
         Schema::dropIfExists('messages');
         Schema::dropIfExists('message_files');
-        Schema::dropIfExists('user_to_user_chat');
-        Schema::dropIfExists('group_chat');
+        Schema::dropIfExists('users_chat_list');
+        Schema::dropIfExists('groups');
     }
 }
