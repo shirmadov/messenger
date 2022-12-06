@@ -282,14 +282,22 @@ function copyMsg(){
 }
 
 function deleteMsg(){
-    document.querySelector('.js__msg__rm__card').style.display='block';
+
+    toggleModal()
+    // document.querySelector('.js__msg__rm__card').style.display='block';
     document.querySelector('.js__msg__right__menu').style.display = 'none';
     o_c_ch = false;
+
+}
+
+function toggleModal() {
+    console.log("Came");
+    document.querySelector(".modal").classList.toggle("show__modal");
 }
 
 function cancelDelete(){
-
-    document.querySelector('.js__msg__rm__card').style.display='none';
+    toggleModal()
+    // document.querySelector('.js__msg__rm__card').style.display='none';
     // document.querySelector('.js__msg__right__menu').style.display = 'none';
     // o_c_ch = false;
 }

@@ -223,25 +223,30 @@
 
     </div>
 
-    <div class="msg__rm__card js__msg__rm__card">
-        <div class="msg__rm__text">Are you sure you want to delete this message</div>
-        <div class="msg__rm__chk__card">
-            <label class="msg__rm__chk__text">
-                <input type="checkbox" class="msg__rm__chk" name="checkbox-checked" checked />
-                <span style="margin-top: 0.15em">Also delete for Sapa Shirmadov</span>
-            </label>
-        </div>
-        <div class="msg__rm__btn">
-            <span class="msg__rm__cancel__btn" onclick="cancel()">CANCEL</span>
-            <span class="msg__rm__delete__btn" onclick="deleteMsgA()">DELETE</span>
-        </div>
-    </div>
+   <div class="modal">
+       <div class="msg__rm__card js__msg__rm__card">
+           <div class="msg__rm__text">Are you sure you want to delete this message</div>
+           <div class="msg__rm__chk__card">
+               <label class="msg__rm__chk__text">
+                   <input type="checkbox" class="msg__rm__chk" name="checkbox-checked" checked />
+                   <span style="margin-top: 0.15em">Also delete for Sapa Shirmadov</span>
+               </label>
+           </div>
+           <div class="msg__rm__btn">
+               <span class="msg__rm__cancel__btn" onclick="cancelDelete()">CANCEL</span>
+               <span class="msg__rm__delete__btn" onclick="deleteMsg()">DELETE</span>
+           </div>
+       </div>
+   </div>
 
 
 
 </div>
 
+
+
 <script src="{{asset('/js/messenger/messenger.js')}}"></script>
 <script src="{{asset('/js/messenger/main.js')}}"></script>
+<script src="{{asset('/js/messenger/crop.js')}}"></script>
 </body>
 </html>
