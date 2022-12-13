@@ -291,7 +291,6 @@ function deleteMsg(){
 }
 
 function toggleModal() {
-    console.log("Came");
     document.querySelector(".modal").classList.toggle("show__modal");
 }
 

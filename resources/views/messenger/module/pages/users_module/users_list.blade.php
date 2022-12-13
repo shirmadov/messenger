@@ -1,12 +1,12 @@
 <div class="user__list">
     <ul class="user__ul__list">
         @foreach($users as $key=>$user)
-{{--            @dd($user)--}}
+            {{--            @dd($user)--}}
             <li class="user__li__list js__user__li__list">
 
                 <div class="user__pr__name">
-{{--                    <img class="user__profile" src="@if(\Auth()->user()->id === $user->id) {{asset('img/profile/saved.jpg')}} @else {{asset('img/profile/anton.jpg')}} @endif" alt=""/>--}}
-{{--                    --}}
+                    {{--                    <img class="user__profile" src="@if(\Auth()->user()->id === $user->id) {{asset('img/profile/saved.jpg')}} @else {{asset('img/profile/anton.jpg')}} @endif" alt=""/>--}}
+                    {{--                    --}}
                     <span class="user__profile__letter" style="background-color: {{$user->avatar_color}}">
                         {{strtoupper(substr(explode(" ", $user->name)[0],0,1).strtoupper(substr(explode(" ", $user->name)[1],0,1)))}}
                     </span>
@@ -25,7 +25,7 @@
                         <div class="column user__msg__time__notif">
                             <span class="user__msg__time">Wed</span>
                             @if($user->notif_count != 0)
-                            <span class="user__msg__notif">{{$user->notif_count}}</span>
+                                <span class="user__msg__notif">{{$user->notif_count}}</span>
                             @endif
                         </div>
                     </div>
@@ -34,5 +34,3 @@
         @endforeach
     </ul>
 </div>
-
-

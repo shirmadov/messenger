@@ -99,10 +99,6 @@ h1, h2, h3, h4, h5, h6{
     transform: scale(1.1);
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
 
-    /*opacity: 1;*/
-    /*visibility: visible;*/
-    /*transform: scale(1.0);*/
-    /*transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;*/
 }
 
 .show__modal{
@@ -111,6 +107,76 @@ h1, h2, h3, h4, h5, h6{
     transform: scale(1.0);
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
+
+/*Drop Image*/
+.drop__crop{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.drop__crop__card{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*background-color: #142233;*/
+    /*padding: 1rem 1.5rem;*/
+    width: 30rem;
+    /*border-radius: 5px;*/
+    /*height: 25rem;*/
+}
+
+.drop__crop__img{
+    display: block;
+
+    /* This rule is very important, please don't ignore this */
+    max-width: 75%;
+
+    visibility: hidden;
+}
+
+.drop__crop__done__icon{
+    float: right;
+    cursor: pointer;
+}
+
+.cropper-crop-box, .cropper-view-box {
+    border-radius: 50%;
+    /*width: 200px !important;*/
+    /*height: 200px !important;*/
+
+}
+
+/*.cropper-crop-box{*/
+/*    transform: translateX(230px) translateY(100px) !important;*/
+/*}*/
+
+/*.cropper-view-box{*/
+/*    transform: translateX(-230px) translateY(-100px) !important;*/
+/*}*/
+
+.cropper-view-box {
+    box-shadow: 0 0 0 1px #39f;
+    outline: 0;
+}
+
+.cropper-container{
+    padding: 10px !important;
+
+}
+
+canvas{
+    max-width: 100% !important;
+}
+
 
 :root {
     --form-control-color: #ffffff;
