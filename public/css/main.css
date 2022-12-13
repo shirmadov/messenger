@@ -122,6 +122,19 @@ h1, h2, h3, h4, h5, h6{
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
+.drop__crop__card__main{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*background-color: #142233;*/
+    padding: 1rem;
+    width: 32rem;
+    border-radius: 5px;
+    height: 25rem;
+    background-color: #142233;;
+}
+
 .drop__crop__card{
     position: absolute;
     top: 50%;
@@ -133,6 +146,8 @@ h1, h2, h3, h4, h5, h6{
     /*border-radius: 5px;*/
     /*height: 25rem;*/
 }
+
+
 
 .drop__crop__img{
     display: block;
