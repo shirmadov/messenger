@@ -292,6 +292,7 @@ function deleteMsg(){
 
 function toggleModal() {
     document.querySelector(".modal").classList.toggle("show__modal");
+
 }
 
 function cancelDelete(){

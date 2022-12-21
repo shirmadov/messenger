@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessengerController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::post('/user_profile_st', [UserController::class,'saveProfileSt']) ->name('user.profile_st')->middleware('auth');
 
 
 Route::get('/messenger',[MessengerController::class,'index'])->name('messenger')->middleware(['auth']);
@@ -27,6 +29,7 @@ Route::post('/choose_me',[MessengerController::class,'choose'])->name('choose_me
 Route::post('/get_msg',[MessengerController::class,'getMsg'])->name('get_msg')->middleware(['auth']);
 Route::post('/delete_msg',[MessengerController::class,'deleteMsg'])->name('delete_msg')->middleware(['auth']);
 Route::get('/files/chat/{id}/{file}', [MessengerController::class,'downloadChatMsgFile']) ->name('download.file')->middleware('auth');
+
 
 Route::get('/test',[MessengerController::class,'test']);
 
