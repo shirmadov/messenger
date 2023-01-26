@@ -1,4 +1,5 @@
- <div class="st__header">
+<div class="page layer3__page5 js__layer3__page" data-layer="5">
+    <div class="st__header">
         <div class="st__header__back js__back__to__menu" onClick="slide('prev')">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path
@@ -7,10 +8,11 @@
             </svg>
         </div>
         <div class="st__header__title">
-            <span class="st__header__name">Notification</span>
+            <span class="st__header__name">Wallpaper Chat</span>
         </div>
 
     </div>
+</div>
 
 
 

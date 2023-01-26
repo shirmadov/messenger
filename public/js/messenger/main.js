@@ -63,11 +63,6 @@ slide = async ( direction, num_page = null ) => {
         })
     }
 
-
-
-
-
-
 }
 
 function editSt(){
@@ -112,13 +107,7 @@ function saveSt(){
 
     formData.append('fullname',fullname)
     formData.append('username',username)
-
-
-
-
     const response = sendData(formData,url);
-
-
 }
 
 
