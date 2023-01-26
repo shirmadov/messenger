@@ -22,7 +22,7 @@ class UserController extends Controller
     public function chooseSt(Request $request){
 
         try {
-
+            dd($request->all());
             $html = view('messenger.module.pages.settings_module.'.$request->path)->render();
 
             return response()->json([

@@ -908,17 +908,46 @@ textarea::placeholder {
     /*overflow: hidden;*/
 }
 
+.layer{
+    width: 100%;
+    height: 100vh;
+    transition: all 0.3s;
+}
+
 .page {
     margin: 0;
     width: 100%;
-    /*height: 100vh;*/
-    /*display: flex;*/
+    height: 100vh;
+    display: flex;
     /*align-items: center;*/
     /*justify-content: center;*/
     flex-direction: column;
     gap: 10px;
-    transition: all 0.5s;
+    transition: all 0.3s;
     color: white;
+}
+
+.layer3__page1{
+    visibility: hidden;
+}
+
+.layer3__page2{
+    visibility: hidden;
+    transform: translateY(-100%);
+}
+.layer3__page3{
+    visibility: hidden;
+    transform: translateY(-200%);
+}
+
+.layer3__page4{
+    visibility: hidden;
+    transform: translateY(-300%);
+}
+
+.layer3__page5{
+    visibility: hidden;
+    transform: translateY(-400%);
 }
 
 

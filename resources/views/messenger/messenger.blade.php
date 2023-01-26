@@ -26,33 +26,100 @@
 
             <div class="left__card js__left__card" >
                 <div class="pages">
-                    <div class="">
-
+                    <div class="layer">
+                        @include('messenger.module.pages.users')
                     </div>
-                    @include('messenger.module.pages.users')
-                    @include('messenger.module.pages.settings')
-                    @include('messenger.module.pages.settings_module.main')
+                    <div class="layer">
+                        @include('messenger.module.pages.settings')
+                    </div>
+                    <div class="layer">
+{{--                        @include('messenger.module.pages.settings_module.main')--}}
+                        <div class="page layer3__page1 js__layer3__page" data-layer="1">
+                            <div class="notifiction__test">
+                                <div class="st__header">
+                                    <div class="st__header__back js__back__to__menu" onClick="slide('prev')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path
+                                                d="M4 12L3.29289 11.2929L2.58579 12L3.29289 12.7071L4 12ZM19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11V13ZM9.29289 5.29289L3.29289 11.2929L4.70711 12.7071L10.7071 6.70711L9.29289 5.29289ZM3.29289 12.7071L9.29289 18.7071L10.7071 17.2929L4.70711 11.2929L3.29289 12.7071ZM4 13H19V11H4V13Z"
+                                                fill="#CCD2E3"/>
+                                        </svg>
+                                    </div>
+                                    <div class="st__header__title">
+                                        <span class="st__header__name">Notification</span>
+                                    </div>
 
-{{--                    <div class="page two">--}}
-{{--                        <h1>PAGE 2</h1>--}}
-{{--                        <div>--}}
-{{--                            <button onClick="slide('prev')">Previous</button>--}}
-{{--                            <button onClick="slide('next')">Next</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="page three">--}}
-{{--                        <h1>PAGE 3</h1>--}}
-{{--                        <div>--}}
-{{--                            <button onClick="slide('prev')">Previous</button>--}}
-{{--                            <button onClick="slide('next')">Next</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="page four">--}}
-{{--                        <h1>PAGE 4</h1>--}}
-{{--                        <div>--}}
-{{--                            <button onClick="slide('prev')">Previous</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="page layer3__page2 js__layer3__page" data-layer="2">
+                            <div class="st__header">
+                                <div class="st__header__back js__back__to__menu" onClick="slide('prev')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M4 12L3.29289 11.2929L2.58579 12L3.29289 12.7071L4 12ZM19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11V13ZM9.29289 5.29289L3.29289 11.2929L4.70711 12.7071L10.7071 6.70711L9.29289 5.29289ZM3.29289 12.7071L9.29289 18.7071L10.7071 17.2929L4.70711 11.2929L3.29289 12.7071ZM4 13H19V11H4V13Z"
+                                            fill="#CCD2E3"/>
+                                    </svg>
+                                </div>
+                                <div class="st__header__title">
+                                    <span class="st__header__name">Data and Storage</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="page layer3__page3 js__layer3__page" data-layer="3">
+                            <div class="st__header">
+                                <div class="st__header__back js__back__to__menu" onClick="slide('prev')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M4 12L3.29289 11.2929L2.58579 12L3.29289 12.7071L4 12ZM19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11V13ZM9.29289 5.29289L3.29289 11.2929L4.70711 12.7071L10.7071 6.70711L9.29289 5.29289ZM3.29289 12.7071L9.29289 18.7071L10.7071 17.2929L4.70711 11.2929L3.29289 12.7071ZM4 13H19V11H4V13Z"
+                                            fill="#CCD2E3"/>
+                                    </svg>
+                                </div>
+                                <div class="st__header__title">
+                                    <span class="st__header__name">Privacy and Security</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="page layer3__page4 js__layer3__page" data-layer="4">
+                            <div class="st__header">
+                                <div class="st__header__back js__back__to__menu" onClick="slide('prev')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M4 12L3.29289 11.2929L2.58579 12L3.29289 12.7071L4 12ZM19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11V13ZM9.29289 5.29289L3.29289 11.2929L4.70711 12.7071L10.7071 6.70711L9.29289 5.29289ZM3.29289 12.7071L9.29289 18.7071L10.7071 17.2929L4.70711 11.2929L3.29289 12.7071ZM4 13H19V11H4V13Z"
+                                            fill="#CCD2E3"/>
+                                    </svg>
+                                </div>
+                                <div class="st__header__title">
+                                    <span class="st__header__name">General Settings</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="page layer3__page5 js__layer3__page" data-layer="5">
+                            <div class="st__header">
+                                <div class="st__header__back js__back__to__menu" onClick="slide('prev')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M4 12L3.29289 11.2929L2.58579 12L3.29289 12.7071L4 12ZM19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11V13ZM9.29289 5.29289L3.29289 11.2929L4.70711 12.7071L10.7071 6.70711L9.29289 5.29289ZM3.29289 12.7071L9.29289 18.7071L10.7071 17.2929L4.70711 11.2929L3.29289 12.7071ZM4 13H19V11H4V13Z"
+                                            fill="#CCD2E3"/>
+                                    </svg>
+                                </div>
+                                <div class="st__header__title">
+                                    <span class="st__header__name">Wallpaper Chat</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                 </div>
             </div>
 

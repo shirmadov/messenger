@@ -34,44 +34,34 @@ let closeMenu = (e)=>{
 }
 
 
-const pages = document.querySelectorAll(".page");
+const layers = document.querySelectorAll('.layer');
+const layer3_pages = document.querySelectorAll(".js__layer3__page");
 const translateAmount = 100;
 let translate = 0;
 
-slide = async ( direction, to = null ) => {
+slide = async ( direction, num_page = null ) => {
     direction === "next" ? translate -= translateAmount : translate += translateAmount;
+    layers.forEach(
 
-    if(to != null){
-
-        // let formData = new FormData;
-        // let url = app_url+'/choose_st';
-        //
-        // formData.append('path',to);
-        //
-        //
-        // let response = await sendData(formData,url)
-
-        let html = '<div class="notifiction__test">\n' +
-            '    <div class="st__header">\n' +
-            '        <div class="st__header__back js__back__to__menu" onClick="slide(\'prev\')">\n' +
-            '            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">\n' +
-            '                <path\n' +
-            '                    d="M4 12L3.29289 11.2929L2.58579 12L3.29289 12.7071L4 12ZM19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11V13ZM9.29289 5.29289L3.29289 11.2929L4.70711 12.7071L10.7071 6.70711L9.29289 5.29289ZM3.29289 12.7071L9.29289 18.7071L10.7071 17.2929L4.70711 11.2929L3.29289 12.7071ZM4 13H19V11H4V13Z"\n' +
-            '                    fill="#CCD2E3"/>\n' +
-            '            </svg>\n' +
-            '        </div>\n' +
-            '        <div class="st__header__title">\n' +
-            '            <span class="st__header__name">Notification</span>\n' +
-            '        </div>\n' +
-            '\n' +
-            '    </div>\n' +
-            '</div>'
-        document.querySelector('.js__st_pages__main').innerHTML = html;
-    }
-
-    pages.forEach(
-        pages => (pages.style.transform = `translateX(${translate}%)`)
+        layers => (layers.style.transform = `translateX(${translate}%)`)
     );
+
+    if(num_page != null){
+        layer3_pages.forEach((item, index)=>{
+
+
+            if(item.dataset.layer == num_page){
+                console.log("Came");
+                item.style.visibility = 'visible'
+            }else{
+                item.style.visibility = 'hidden'
+            }
+        })
+    }else{
+        layer3_pages.forEach((item, index)=>{
+            item.style.visibility = 'hidden'
+        })
+    }
 
 
 
