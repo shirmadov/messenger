@@ -1,4 +1,6 @@
 let menu_status = false
+let formData = new FormData;
+
 let hamburgerMenu = ()=>{
     let menu = document.querySelector('.js__hamburger__menu');
 
@@ -36,34 +38,97 @@ const pages = document.querySelectorAll(".page");
 const translateAmount = 100;
 let translate = 0;
 
-slide = (direction) => {
+slide = async ( direction, to = null ) => {
     direction === "next" ? translate -= translateAmount : translate += translateAmount;
+
+    if(to != null){
+
+        // let formData = new FormData;
+        // let url = app_url+'/choose_st';
+        //
+        // formData.append('path',to);
+        //
+        //
+        // let response = await sendData(formData,url)
+
+        let html = '<div class="notifiction__test">\n' +
+            '    <div class="st__header">\n' +
+            '        <div class="st__header__back js__back__to__menu" onClick="slide(\'prev\')">\n' +
+            '            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">\n' +
+            '                <path\n' +
+            '                    d="M4 12L3.29289 11.2929L2.58579 12L3.29289 12.7071L4 12ZM19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11V13ZM9.29289 5.29289L3.29289 11.2929L4.70711 12.7071L10.7071 6.70711L9.29289 5.29289ZM3.29289 12.7071L9.29289 18.7071L10.7071 17.2929L4.70711 11.2929L3.29289 12.7071ZM4 13H19V11H4V13Z"\n' +
+            '                    fill="#CCD2E3"/>\n' +
+            '            </svg>\n' +
+            '        </div>\n' +
+            '        <div class="st__header__title">\n' +
+            '            <span class="st__header__name">Notification</span>\n' +
+            '        </div>\n' +
+            '\n' +
+            '    </div>\n' +
+            '</div>'
+        document.querySelector('.js__st_pages__main').innerHTML = html;
+    }
+
     pages.forEach(
         pages => (pages.style.transform = `translateX(${translate}%)`)
     );
+
+
+
+
+
+
 }
 
 function editSt(){
-    document.querySelector('.js__profile__form__input').removeAttribute('readonly');
-
     document.querySelector('.js__st__header__edit').style.display = 'none';
     document.querySelector('.js__st__header__save').style.display = 'block';
+    document.querySelector('.js__page__camera').style.visibility = 'visible';
     let underline = document.querySelectorAll('.js__profile__form__underline')
+    let inputs = document.querySelectorAll('.js__profile__form__input')
     underline.forEach((element, index) =>{
         element.style.transform = 'scale(1)'
+    });
+
+    inputs.forEach((element, index)=>{
+        element.removeAttribute("readonly");
     });
 }
 
 
 function saveSt(){
-    document.querySelector('.js__profile__form__input').removeAttribute('readonly');
-
     document.querySelector('.js__st__header__edit').style.display = 'block';
     document.querySelector('.js__st__header__save').style.display = 'none';
+    document.querySelector('.js__page__camera').style.visibility = 'hidden';
+
+
     let underline = document.querySelectorAll('.js__profile__form__underline')
+    let inputs = document.querySelectorAll('.js__profile__form__input')
+
     underline.forEach((element, index) =>{
-        element.style.transform = 'scale(0,1)'
+        element.style.transform = 'scale(0,1)';
+
     });
+
+    inputs.forEach((element, index)=>{
+        element.readOnly = true;
+    });
+
+
+    let url = app_url+'/user_profile_st';
+    let fullname = document.querySelector("[name='fullname']").value;
+    let username = document.querySelector("[name='username']").value;
+    console.log(fullname,username);
+
+    formData.append('fullname',fullname)
+    formData.append('username',username)
+
+
+
+
+    const response = sendData(formData,url);
+
+
 }
 
 
@@ -142,22 +207,26 @@ function chooseProfileImg(){
 
             // console.log(roundedCanvas.toDataURL());
 
-            // roundedCanvas.toBlob(function(blob){
-            //     let formData = new FormData;
-            //     let url = app_url+'/user_profile_st';
-            //
-            //     formData.append('profile_img',blob,'test.png');
-            //     const response = sendData(formData,url);
-            // });
+            roundedCanvas.toBlob(function(blob){
+                // let formData = new FormData;
+                // let url = app_url+'/user_profile_st';
+                //
+                // formData.append('profile_img',blob,'test.png');
+                // const response = sendData(formData,url);
+
+                formData.append('profile_img',blob,'test.png');
+            });
             //
             // done();
 
 
             // Show
             // roundedImage = document.createElement('img');
-            // roundedImage.src = roundedCanvas.toDataURL()
+            roundedImage = document.querySelector('.js__profile__picture__img')
+            roundedImage.src = roundedCanvas.toDataURL()
             // result.innerHTML = '';
             // result.appendChild(roundedImage);
+            done();
 
 
 
@@ -190,17 +259,20 @@ function chooseProfileImg(){
 
 }
 
-// function overProfile(){
-//     document.querySelector('.page__st__profile__picture').addEventListener('mouseover',(e)=>{
-//         console.log("Come")
-//         document.querySelector('.js__page__camera').style.visibility = 'visible'
-//     });
-//
-//     document.querySelector('.page__st__profile__picture').addEventListener('mouseout',(e)=>{
-//         console.log("Out")
-//         document.querySelector('.js__page__camera').style.visibility = 'hidden'
-//     });
-// }
+
+
+
+function overProfile(){
+    document.querySelector('.page__st__profile__picture').addEventListener('mouseover',(e)=>{
+        console.log("Come")
+        document.querySelector('.js__page__camera').style.visibility = 'visible'
+    });
+
+    document.querySelector('.page__st__profile__picture').addEventListener('mouseout',(e)=>{
+        console.log("Out")
+        document.querySelector('.js__page__camera').style.visibility = 'hidden'
+    });
+}
 
 
 document.addEventListener("DOMContentLoaded", ()=>{

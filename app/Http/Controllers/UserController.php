@@ -10,13 +10,27 @@ class UserController extends Controller
 
     public function saveProfileSt(Request $request, User $user){
         try {
-
-            $profile = $user->saveProfileImg($request->profile_img);
+            $profile = $user->saveProfile($request->all());
 
             return response()->json(['success'=>true]);
         }catch(\Exception $e){
             return $e->getMessage();
         }
-        dd('Came',$request->all());
+//        dd('Came',$request->all());
+    }
+
+    public function chooseSt(Request $request){
+
+        try {
+
+            $html = view('messenger.module.pages.settings_module.'.$request->path)->render();
+
+            return response()->json([
+                'success'=>true,
+                'content'=>$html
+            ]);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
     }
 }

@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::post('/user_profile_st', [UserController::class,'saveProfileSt']) ->name('user.profile_st')->middleware('auth');
+Route::post('/choose_st', [UserController::class,'chooseSt']) ->name('choose_st')->middleware('auth');
 
 
 Route::get('/messenger',[MessengerController::class,'index'])->name('messenger')->middleware(['auth']);

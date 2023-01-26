@@ -26,8 +26,33 @@
 
             <div class="left__card js__left__card" >
                 <div class="pages">
+                    <div class="">
+
+                    </div>
                     @include('messenger.module.pages.users')
                     @include('messenger.module.pages.settings')
+                    @include('messenger.module.pages.settings_module.main')
+
+{{--                    <div class="page two">--}}
+{{--                        <h1>PAGE 2</h1>--}}
+{{--                        <div>--}}
+{{--                            <button onClick="slide('prev')">Previous</button>--}}
+{{--                            <button onClick="slide('next')">Next</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="page three">--}}
+{{--                        <h1>PAGE 3</h1>--}}
+{{--                        <div>--}}
+{{--                            <button onClick="slide('prev')">Previous</button>--}}
+{{--                            <button onClick="slide('next')">Next</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="page four">--}}
+{{--                        <h1>PAGE 4</h1>--}}
+{{--                        <div>--}}
+{{--                            <button onClick="slide('prev')">Previous</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
 

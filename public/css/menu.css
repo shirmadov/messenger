@@ -125,7 +125,7 @@ input:checked + .slider:before {
 /* PROFILE SETTINGS */
 .page__st{
     margin: 10px 20px 10px 20px;
-    background-color:#142233 ;
+    background-color:#141d2b;
     /*padding: 5px 0;*/
     border-radius: 5px;
     /*margin: 10px;*/
@@ -168,7 +168,7 @@ input:checked + .slider:before {
 .profile__picture__img{
     height: 150px;
     width: 150px;
-    cursor: pointer;
+
 }
 
 
@@ -188,9 +188,9 @@ input:checked + .slider:before {
     /*visibility: visible;*/
 }
 
-.page__camera__icon:hover{
-    visibility: visible;
-}
+/*.page__camera__icon:hover{*/
+/*    visibility: visible;*/
+/*}*/
 
 
 .page__st__profile__form{
@@ -213,7 +213,7 @@ input:checked + .slider:before {
 }
 
 .profile__form__input{
-    background-color: #142233;
+    background-color: #141d2b;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 18px;
 }

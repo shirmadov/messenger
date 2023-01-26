@@ -302,11 +302,22 @@ canvas{
     display: flex;
 }
 
+.search__stick__card{
+    width: 100%;
+    background-color: red;
+    /*display: inline-block;*/
+
+    /*position: relative;*/
+}
+
 .search__stick{
+    /*position: absolute;*/
+    margin: auto 0;
     font-family: 'Kanit', sans-serif;
     /*font-family: 'Nunito', sans-serif;*/
-    height: 30px;
+
     width: 70%;
+    height: 30px;
     padding: 15px;
     background-color: #142233;
     background-color: #2A3D4C;
@@ -321,6 +332,7 @@ input[type=text] {
     outline: none;
     border-radius: 5px;
     border: none;
+    caret-color: #00B2BE;
 }
 
 ::placeholder{
@@ -883,7 +895,7 @@ textarea::placeholder {
 .pages {
     margin: 0;
     display: flex;
-    width: 200%;
+    width: 300%;
     box-sizing: border-box;
 
     /*width: 40%;*/
@@ -898,7 +910,7 @@ textarea::placeholder {
 
 .page {
     margin: 0;
-    width: 50%;
+    width: 100%;
     /*height: 100vh;*/
     /*display: flex;*/
     /*align-items: center;*/
