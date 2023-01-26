@@ -73,5 +73,28 @@ class User extends Authenticatable
 
     }
 
+    public function saveProfile($request)
+    {
+        $user = \Auth()->user();
+        if (isset($request['profile_img'])) {
+            $filename = uniqid() . '.' . $request['profile_img']->getClientOriginalExtension();
+            $request['profile_img']->move(public_path('/img/profile'), $filename);
+
+            Profile::where('user_id',$user->id)
+            ->update(['avatar'=>$filename]);
+        }
+
+        $user_info = User::find($user->id);
+        $user_info->name = $request['fullname'];
+        $user_info->username = $request['username'];
+        $user_info->save();
+
+        return true;
+    }
+
+    public function profile(){
+        return $this->hasOne(Profile::class);
+    }
+
 
 }

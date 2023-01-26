@@ -15,9 +15,8 @@ class MessengerController extends Controller
   public function index(Message $message, User $user){
 
       $users = $user->getUsers();
-
-
-//      $users = User::get();
+      $user_profile = auth()->user()->profile;
+//      dd(\Auth()->user()->profile->avatar);
       return view('messenger.messenger', compact('users'));
   }
 
