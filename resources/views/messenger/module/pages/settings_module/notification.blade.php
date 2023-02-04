@@ -14,6 +14,13 @@
 
         </div>
     </div>
+
+    <div class="page__st">
+        <div class="st__notification__card">
+            <input type="checkbox" class="msg__rm__chk" name="checkbox-checked" />
+            <span class="st__notification__text">Notification Sound</span>
+        </div>
+    </div>
 </div>
 
 
