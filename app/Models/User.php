@@ -56,7 +56,7 @@ class User extends Authenticatable
             ->join('profiles','users.id','=','profiles.user_id')
             ->leftJoin('groups','users_chat_list.group_id','=','groups.id')
 //            ->join('messages','users_chat_list.chat_list_id','=','messages.chat_list_id')
-            ->select('users_chat_list.*','users.name','users.id as user_id','profiles.avatar_color as avatar_color')
+            ->select('users_chat_list.*','users.name','users.id as user_id','profiles.avatar_color as avatar_color','profiles.avatar as avatar_path')
             ->get();
 
         $user_chats->each(function( $item, $key ) use($user_id){

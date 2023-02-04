@@ -1,20 +1,34 @@
 let menu_status = false
 let formData = new FormData;
+const layers = document.querySelectorAll('.layer');
+const layer3_pages = document.querySelectorAll(".js__layer3__page");
+const translateAmount = 100;
+let translate = 0;
 
 let hamburgerMenu = ()=>{
     let menu = document.querySelector('.js__hamburger__menu');
 
+
     if(menu === null) return;
     menu.addEventListener('click', (e)=>{
 
-        let menu_card = document.querySelector('.js__hm__menu__card');
-        if(menu_status){
-            menu_card.style.display = 'none'
-            menu_status = false;
-        }else if(menu_status == false){
-            menu_card.style.display = 'block'
-            menu_status = true;
+        if(menu.dataset.menu === 'true'){
+            let menu_card = document.querySelector('.js__hm__menu__card');
+            if(menu_status){
+                menu_card.style.display = 'none'
+                menu_status = false;
+            }else if(menu_status == false){
+                menu_card.style.display = 'block'
+                menu_status = true;
+            }
+        }else{
+            menu.classList.toggle('active');
+            menu.dataset.menu = 'true';
+            document.querySelector('.js__search__list').classList.toggle('active_two')
+            document.querySelector('.js__user__list').classList.toggle('active_one');
+
         }
+
     })
 }
 
@@ -33,13 +47,20 @@ let closeMenu = (e)=>{
     }
 }
 
+function focusSearch(){
+    let stick = document.querySelector('.js__hamburger__menu');
+    // stick.classList.toggle('active');
+    stick.dataset.menu = 'false'
+    stick.classList.add('active');
+    document.querySelector('.js__search__list').classList.toggle('active_two')
+    document.querySelector('.js__user__list').classList.toggle('active_one');
 
-const layers = document.querySelectorAll('.layer');
-const layer3_pages = document.querySelectorAll(".js__layer3__page");
-const translateAmount = 100;
-let translate = 0;
+
+}
 
 slide = async ( direction, num_page = null ) => {
+
+
     direction === "next" ? translate -= translateAmount : translate += translateAmount;
     layers.forEach(
 
@@ -48,7 +69,6 @@ slide = async ( direction, num_page = null ) => {
 
     if(num_page != null){
         layer3_pages.forEach((item, index)=>{
-
 
             if(item.dataset.layer == num_page){
                 console.log("Came");
@@ -239,25 +259,10 @@ function chooseProfileImg(){
 }
 
 
-
-
-function overProfile(){
-    document.querySelector('.page__st__profile__picture').addEventListener('mouseover',(e)=>{
-        console.log("Come")
-        document.querySelector('.js__page__camera').style.visibility = 'visible'
-    });
-
-    document.querySelector('.page__st__profile__picture').addEventListener('mouseout',(e)=>{
-        console.log("Out")
-        document.querySelector('.js__page__camera').style.visibility = 'hidden'
-    });
-}
-
-
 document.addEventListener("DOMContentLoaded", ()=>{
     hamburgerMenu();
     chooseProfileImg()
-    // overProfile()
+
     const csrfToken = document.querySelector('[name=csrf-token]').content;
 
 })
