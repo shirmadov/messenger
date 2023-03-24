@@ -373,7 +373,7 @@ input[type=text] {
 }
 
 .user__list{
-    transform: scale(1);
+    /*transform: scale(1);*/
     transition-duration: 0.2s;
 
 }
@@ -402,8 +402,11 @@ input[type=text] {
 
 .user__search__user{
     color: #A9A9A9;
-    margin:3em 0 0 2em;
-    font-style: inherit;
+    color: #00B2BE;
+    margin:3em 0 0 1.5em;
+    /*font-style: inherit;*/
+    /*font-size: 16px;*/
+    font-family: 'Josefin Sans', sans-serif
 }
 
 

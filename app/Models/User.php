@@ -96,5 +96,15 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    public function userWanted($value){
+
+        if(str_starts_with($value,'@') == false) $value = '@'.$value;
+        $users = $this->where('username','like',strtolower($value).'%')
+            ->join('profiles','users.id','=','profiles.user_id')
+            ->select('users.name','users.username','users.id as user_id','profiles.avatar_color as avatar_color','profiles.avatar as avatar_path')
+            ->get();
+        return $users;
+    }
+
 
 }
