@@ -13,6 +13,8 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+{{--    @stack('css')--}}
+
     <link rel="stylesheet" href="/css/main.css?v={{ Config::get('app.media_files_version') }}">
     <link rel="stylesheet" href="/css/menu.css?v={{ Config::get('app.media_files_version') }}">
     <link rel="stylesheet" href="/js/cropperjs/cropper.min.css?v={{ Config::get('app.media_files_version') }}">

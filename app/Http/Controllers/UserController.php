@@ -33,4 +33,21 @@ class UserController extends Controller
             return $e->getMessage();
         }
     }
+
+    public function searchUser(Request $request, User $user){
+        try {
+            $users = $user->userWanted($request->value);
+
+//            dd($users);
+            $html = view('messenger.module.pages.users_module.users_list_module',compact('users'))->render();
+//            dd($html);
+
+            return response()->json([
+                'success'=>true,
+                'content'=>$html
+            ]);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }

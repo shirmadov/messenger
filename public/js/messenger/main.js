@@ -49,14 +49,38 @@ let closeMenu = (e)=>{
 
 function focusSearch(){
     let stick = document.querySelector('.js__hamburger__menu');
-    // stick.classList.toggle('active');
-    stick.dataset.menu = 'false'
-    stick.classList.add('active');
-    document.querySelector('.js__search__list').classList.toggle('active_two')
-    document.querySelector('.js__user__list').classList.toggle('active_one');
 
+    if(stick.dataset.menu === 'true'){
+        document.querySelector('.js__search__list').classList.toggle('active_two')
+        document.querySelector('.js__user__list').classList.toggle('active_one');
+        stick.dataset.menu = 'false'
+        stick.classList.add('active');
+    }
 
+    let search = document.querySelector('.js__search__stick');
+
+    search.onkeyup = async (e)=>{
+        let formData = new FormData;
+        let url = app_url+'/search_user';
+
+        if( search.value != '' ){
+            formData.append('value',search.value)
+            let response = await sendData( formData, url)
+
+            console.log(response.success)
+
+            if(response.success == true){
+                console.log('success')
+                document.querySelector('.js__search__list__ul').innerHTML= response.content
+
+            }
+        }else{
+            document.querySelector('.js__search__list__ul').innerHTML= ""
+        }
+
+    }
 }
+
 
 slide = async ( direction, num_page = null ) => {
 
