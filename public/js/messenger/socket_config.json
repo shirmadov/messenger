@@ -1,0 +1,4 @@
+{
+    "crt": "/etc/letsencrypt/live/shirmadov.space/fullchain.pem",
+    "key": "/etc/letsencrypt/live/shirmadov.space/privkey.pem"
+}

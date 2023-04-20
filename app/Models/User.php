@@ -78,8 +78,11 @@ class User extends Authenticatable
         $user = \Auth()->user();
         if (isset($request['profile_img'])) {
             $filename = uniqid() . '.' . $request['profile_img']->getClientOriginalExtension();
-            $request['profile_img']->move(public_path('/img/profile'), $filename);
+//            dd($request->hasFile('profile_img'));
+            $filePath = 'public/img/profile';
+//            $request['profile_img']->move($filePath, $filename);
 
+            $request['profile_img']->storeAs($filePath, $filename, 'private');
             Profile::where('user_id',$user->id)
             ->update(['avatar'=>$filename]);
         }

@@ -23,14 +23,21 @@
         </div>
 
         <div class="page__st__profile__picture">
+{{--            @if(!is_null(\Auth()->user()->profile->avatar))--}}
+{{--            @else--}}
+{{--            @endif--}}
 
-                <div class="profile__picture" @if(is_null(\Auth()->user()->profile->avatar)) style="opacity: 0.6;background-color: #4BC87E;" @endif>
+
+                <div class="profile__picture js__profile__picture" @if(is_null(\Auth()->user()->profile->avatar)) style="background-color: {{\Auth()->user()->profile->avatar_color}}" @endif>
                     @if(!is_null(\Auth()->user()->profile->avatar))
-                        <img class="profile__picture__img js__profile__picture__img" src="{{asset('img/profile/').'/'.\Auth()->user()->profile->avatar}}" alt="">
+                        <img class="profile__picture__img js__profile__picture__img" style="" src="{{asset('img/profile/').'/'.\Auth()->user()->profile->avatar}}" alt="">
                     @else
-                        <span class="profile__text">SS</span>
+                        <span class="profile__text js__profile__text" >
+                        {{strtoupper(substr(explode(" ", \Auth()->user()->name)[0],0,1).strtoupper(substr(explode(" ", \Auth()->user()->name)[1],0,1)))}}
                     @endif
+{{--                    <img class="profile__picture__img js__profile__picture__img" style="" src="" alt="">--}}
                 </div>
+
             <div class="page__camera__icon js__page__camera" @if(!is_null(\Auth()->user()->profile->avatar)) style="visibility: hidden" @endif>
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="41" viewBox="0 0 36 41" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd"

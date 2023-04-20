@@ -1,5 +1,5 @@
 let form = document.querySelector("#msg__form");
-const socket = new WebSocket('ws://localhost:8000');
+const socket = new WebSocket("wss://" + window.location.host + ":8080");
 let app_url = location.origin;
 let chosen_id = null;
 let chat_type = 'user_to_user';
@@ -188,7 +188,6 @@ oncontextmenu = (e)=>{
         // closeMenu(e);
     }
 }
-
 
 
 function clearInput(){

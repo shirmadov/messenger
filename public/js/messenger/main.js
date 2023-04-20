@@ -67,10 +67,7 @@ function focusSearch(){
             formData.append('value',search.value)
             let response = await sendData( formData, url)
 
-            console.log(response.success)
-
             if(response.success == true){
-                console.log('success')
                 document.querySelector('.js__search__list__ul').innerHTML= response.content
 
             }
@@ -95,7 +92,6 @@ slide = async ( direction, num_page = null ) => {
         layer3_pages.forEach((item, index)=>{
 
             if(item.dataset.layer == num_page){
-                console.log("Came");
                 item.style.visibility = 'visible'
             }else{
                 item.style.visibility = 'hidden'
@@ -147,7 +143,6 @@ function saveSt(){
     let url = app_url+'/user_profile_st';
     let fullname = document.querySelector("[name='fullname']").value;
     let username = document.querySelector("[name='username']").value;
-    console.log(fullname,username);
 
     formData.append('fullname',fullname)
     formData.append('username',username)
@@ -190,6 +185,7 @@ function chooseProfileImg(){
     let done = (url='')=>{
         image.src = url;
         document.querySelector(".drop__crop").classList.toggle("drop__crop__show");
+
     }
 
     let croppperjs = (image)=>{
@@ -209,11 +205,11 @@ function chooseProfileImg(){
             },
         });
 
-        console.log("Came");
         var contData = cropper.getContainerData(); //Get container data
         cropper.setCropBoxData({ height: contData.height, width: contData.width  })
 
         btn.onclick = (e) => {
+            console.log("Came");
             var croppedCanvas;
             var roundedCanvas;
             var roundedImage;
@@ -228,16 +224,14 @@ function chooseProfileImg(){
             // Round
             roundedCanvas = getRoundedCanvas(croppedCanvas);
 
-            // console.log(roundedCanvas.toDataURL());
-
             roundedCanvas.toBlob(function(blob){
                 // let formData = new FormData;
                 // let url = app_url+'/user_profile_st';
                 //
-                // formData.append('profile_img',blob,'test.png');
+                // formData.append('profile_img',blob,'background21.png');
                 // const response = sendData(formData,url);
 
-                formData.append('profile_img',blob,'test.png');
+                formData.append('profile_img',blob,'background21.png');
             });
             //
             // done();
@@ -251,9 +245,6 @@ function chooseProfileImg(){
             // result.appendChild(roundedImage);
             done();
 
-
-
-            // console.log(response)
         }
     }
 
