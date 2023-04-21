@@ -32,8 +32,11 @@ Route::post('/delete_msg',[MessengerController::class,'deleteMsg'])->name('delet
 Route::get('/files/chat/{id}/{file}', [MessengerController::class,'downloadChatMsgFile']) ->name('download.file')->middleware('auth');
 
 Route::post('/search_user',[UserController::class,'searchUser'])->name('search_user')->middleware(['auth']);
+Route::get('/test',[UserController::class,'test'])->name('test');
+Route::get('/show',function(){
+    return view('show');
+});
 
-Route::get('/test',[MessengerController::class,'test']);
 
 
 Route::get('/dashboard', function () {

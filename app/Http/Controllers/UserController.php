@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -49,5 +50,23 @@ class UserController extends Controller
         }catch(\Exception $e){
             return $e->getMessage();
         }
+    }
+
+    public function test(){
+
+//        dd(file_exists(public_path('img/profile/avatar.png')));
+//        $im = imagecreatefrompng(public_path('img/profile/avatar.png'));
+        $im = imagecreatetruecolor(400, 300);
+        $bgc = imagecolorallocate($im, 100, 200, 20);
+        imagefilledellipse($im,200, 150, 300, 200, $bgc);
+        header('Content-Type: image/png');
+
+        imagepng($im,public_path('img/profile/avatar5.png'));
+        imagedestroy($im);
+
+//        echo '<img src="'.base64_encode($im).'" alt="">';
+
+//        return $im;
+
     }
 }

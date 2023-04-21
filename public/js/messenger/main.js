@@ -240,6 +240,9 @@ function chooseProfileImg(){
             // Show
             // roundedImage = document.createElement('img');
             roundedImage = document.querySelector('.js__profile__picture__img')
+            document.querySelector('.js__profile__text').style.display = 'none';
+            document.querySelector('.js__profile__picture').style.backgroundColor = '';
+            roundedImage.style.display = 'block';
             roundedImage.src = roundedCanvas.toDataURL()
             // result.innerHTML = '';
             // result.appendChild(roundedImage);
