@@ -1,10 +1,18 @@
 const fs = require('fs');
 const https = require('https');
+const config = require(__dirname+"/socket_config.json");
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({port:8000}, ()=>{
-    console.log('Connected');
+// const wss = new WebSocket.Server({port:8000}, ()=>{
+//     console.log('Connected');
+// });
+
+const server = https.createServer({
+    cert: fs.readFileSync(config.crt),
+    key: fs.readFileSync(config.key)
 });
+
+const wss = new WebSocket.Server({ server });
 
 // const clients = new Set();
 // CLIENTS = [];
@@ -13,7 +21,6 @@ wss.on('connection', function connection(ws) {
     ws.on('message', function message(data) {
 
         const all_data = JSON.parse(data);
-        // console.log(all_data);
 
         if(all_data.data_type === 1){
             ws.id = all_data.hash_token;
@@ -44,3 +51,5 @@ wss.on('connection', function connection(ws) {
 
     // ws.send('something');
 });
+
+server.listen(8080);

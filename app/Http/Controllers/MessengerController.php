@@ -14,6 +14,8 @@ class MessengerController extends Controller
 
   public function index(Message $message, User $user){
 
+//      dd(Storage::exists('public'));
+
       $users = $user->getUsers();
 
 //      dd($users);

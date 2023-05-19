@@ -24,14 +24,15 @@
 
         <div class="page__st__profile__picture">
 
-                <div class="profile__picture" @if(is_null(\Auth()->user()->profile->avatar)) style="opacity: 0.6;background-color: #4BC87E;" @endif>
-                    @if(!is_null(\Auth()->user()->profile->avatar))
-                        <img class="profile__picture__img js__profile__picture__img" src="{{asset('img/profile/').'/'.\Auth()->user()->profile->avatar}}" alt="">
-                    @else
-                        <span class="profile__text">SS</span>
-                    @endif
-                </div>
-            <div class="page__camera__icon js__page__camera" @if(!is_null(\Auth()->user()->profile->avatar)) style="visibility: hidden" @endif>
+            <div class="profile__picture js__profile__picture"  @if(is_null(\Auth()->user()->profile->avatar)) style="background-color: {{\Auth()->user()->profile->avatar_color}}" @endif>
+                <span class="profile__text js__profile__text" @if(!is_null(\Auth()->user()->profile->avatar)) style="display: none" @endif >
+                    {{strtoupper(substr(explode(" ", \Auth()->user()->name)[0],0,1).strtoupper(substr(explode(" ", \Auth()->user()->name)[1],0,1)))}}
+                </span>
+                <img class="profile__picture__img js__profile__picture__img" @if(!is_null(\Auth()->user()->profile->avatar))  src="{{asset('img/profile/').'/'.\Auth()->user()->profile->avatar}}" @else style="display: none" @endif alt="">
+            </div>
+
+            <div class="page__camera__icon js__page__camera" >
+{{--                @if(!is_null(\Auth()->user()->profile->avatar)) style="visibility: hidden" @endif--}}
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="41" viewBox="0 0 36 41" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                           d="M3.58579 13.0858C3 13.6716 3 14.6144 3 16.5V29.5C3 31.3856 3 32.3284 3.58579 32.9142C4.17157 33.5 5.11438 33.5 7 33.5H29C30.8856 33.5 31.8284 33.5 32.4142 32.9142C33 32.3284 33 31.3856 33 29.5V16.5C33 14.6144 33 13.6716 32.4142 13.0858C31.8284 12.5 30.8856 12.5 29 12.5H7C5.11438 12.5 4.17157 12.5 3.58579 13.0858ZM7.5 16C6.94772 16 6.5 16.4477 6.5 17C6.5 17.5523 6.94772 18 7.5 18H10.5C11.0523 18 11.5 17.5523 11.5 17C11.5 16.4477 11.0523 16 10.5 16H7.5ZM24.5 29C24.5 28.4477 24.9477 28 25.5 28H28.5C29.0523 28 29.5 28.4477 29.5 29C29.5 29.5523 29.0523 30 28.5 30H25.5C24.9477 30 24.5 29.5523 24.5 29ZM20.5 23C20.5 24.3807 19.3807 25.5 18 25.5C16.6193 25.5 15.5 24.3807 15.5 23C15.5 21.6193 16.6193 20.5 18 20.5C19.3807 20.5 20.5 21.6193 20.5 23ZM22.5 23C22.5 25.4853 20.4853 27.5 18 27.5C15.5147 27.5 13.5 25.4853 13.5 23C13.5 20.5147 15.5147 18.5 18 18.5C20.4853 18.5 22.5 20.5147 22.5 23Z"

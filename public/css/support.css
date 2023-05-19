@@ -1,0 +1,28 @@
+ .support__chat{
+     position: fixed;
+     bottom: 15px;
+     right: 15px;
+     width: 300px;
+     overflow: hidden;
+     z-index: 1000;
+    background-color: #2563eb;
+     cursor: pointer;
+ }
+
+ .support__chat__header{
+
+ }
+
+ .support__chat__main{
+     /*display: flex;*/
+     top: 100%;
+     position: relative;
+     transition: all .3s ease-out;
+     background: #428bca;
+     height: 100%;
+     max-height: 400px;
+ }
+
+ .support__chat__main:hover > .support__chat__main{
+     top: 0;
+ }

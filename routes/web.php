@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessengerController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SupportChatController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,17 @@ Route::get('/files/chat/{id}/{file}', [MessengerController::class,'downloadChatM
 
 Route::post('/search_user',[UserController::class,'searchUser'])->name('search_user')->middleware(['auth']);
 
-Route::get('/test',[MessengerController::class,'test']);
+Route::get('/support_chat',[SupportChatController::class,'index'])->name('support_chat')->middleware(['auth']);
+
+Route::get('/test',[UserController::class,'test'])->name('test');
+Route::get('/show',function(){
+    return view('show');
+});
+
+Route::get('/phpinfo',function(){
+    phpinfo();
+});
+
 
 
 Route::get('/dashboard', function () {

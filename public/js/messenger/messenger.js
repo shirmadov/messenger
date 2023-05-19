@@ -1,8 +1,9 @@
 let form = document.querySelector("#msg__form");
-const socket = new WebSocket('ws://localhost:8000');
+const socket = new WebSocket("wss://" + window.location.host + ":8080");
 let app_url = location.origin;
 let chosen_id = null;
 let chat_type = 'user_to_user';
+let amount_file = document.querySelector('.js__msg__file__count');
 
 
 let o_c_ch = false;
@@ -37,8 +38,8 @@ const sendMsg = async () =>{
         // text:response.content.text,
         id:response.msg_id,
     }
-
     socket.send(JSON.stringify(data));
+
     await clearInput();
     await cros();
 }
@@ -190,10 +191,11 @@ oncontextmenu = (e)=>{
 }
 
 
-
 function clearInput(){
+    console.log("Came")
     document.querySelector('.js__msg__textarea').textContent ='';
-
+    amount_file.innerText = 0;
+    amount_file.style.display = 'none';
     msg_inf.msg_id = '';
     msg_inf.msg_author = '';
     msg_inf.msg_text = '';
@@ -313,14 +315,13 @@ async function deleteMsgA(){
 }
 
 const chooseFile = async ()=>{
-    clickFile()
-    let file = document.querySelector('.js__msg__file');
 
+    let file = document.querySelector('.js__msg__file');
+    document.querySelector('.js__msg__file').click();
     file.onclick = function(){
         this.files = null;
     }
     file.onchange = function () {
-        console.log(this.files.length);
         let amount_file = document.querySelector('.js__msg__file__count');
         amount_file.style.display = 'block';
         amount_file.innerText = this.files.length
@@ -330,7 +331,7 @@ const chooseFile = async ()=>{
 }
 
 function clickFile(){
-    document.querySelector('.js__msg__file').click();
+
 }
 
 

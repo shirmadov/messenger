@@ -168,12 +168,11 @@ input:checked + .slider:before {
 .profile__picture__img{
     height: 150px;
     width: 150px;
-
 }
 
 
 .profile__text{
-    opacity: 0.6;
+    /*opacity: 0.7;*/
     font-size: 36px;
 }
 
@@ -185,7 +184,7 @@ input:checked + .slider:before {
     margin-right: 7px;
     margin-bottom: 5px;
     cursor: pointer;
-    /*visibility: visible;*/
+    visibility: hidden;
 }
 
 /*.page__camera__icon:hover{*/

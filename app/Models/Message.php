@@ -35,6 +35,7 @@ class Message extends Model
         $message->save();
 
         if(!is_null($msg_files)){
+
             foreach ($msg_files as $msg_file){
 
                 $filePath = '/files/chat/'.$chat_list_id;
