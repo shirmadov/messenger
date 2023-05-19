@@ -11,6 +11,7 @@
     <div class="reply__msg__main" style="padding: 0; margin: 0">
         <div class="reply__msg__border"></div>
         <div class="reply__msg__inf">
+            @if(!is_null($message->reply_msg))
             <span class="reply__msg__author">{{$message->reply_msg->author_name}}</span>
             <div class="reply__msg__text">
                 {{substr($message->reply_msg->text,0,45)}}
@@ -18,6 +19,12 @@
                     ...
                 @endif
             </div>
+            @else
+                <span class="reply__msg__author">Unknown</span>
+                <div class="reply__msg__text" style="font-style: italic; color:#DEDEDE">
+                    Deleted message
+                </div>
+            @endif
         </div>
     </div>
 

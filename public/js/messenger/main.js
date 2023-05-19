@@ -32,18 +32,22 @@ let hamburgerMenu = ()=>{
     })
 }
 
-let closeMenu = (e)=>{
+let closeMenu = async(e)=>{
 
     const target = e.target;
     if (target.closest('.js__hamburger__menu') || target.closest('.js__hm__menu__card') || target.closest('.js__msg__right__menu')) return;
     if(menu_status == true){
         document.querySelector('.js__hm__menu__card').style.display = 'none';
         menu_status = false;
+        // await clearInput();
+        console.log("First")
+
     }
 
     if(o_c_ch == true){
         document.querySelector('.js__msg__right__menu').style.display = 'none';
         o_c_ch = false;
+        await clearInput();
     }
 }
 

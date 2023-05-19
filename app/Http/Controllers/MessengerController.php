@@ -75,6 +75,7 @@ class MessengerController extends Controller
           $messages =  $message->getMsg($chat_list_id);
 
 
+//          dd($messages);
           $html = view('messenger.module.messages', compact('messages'))->render();
 
           return response()->json(['success'=>true,'content'=>$html]);
@@ -109,6 +110,8 @@ class MessengerController extends Controller
             $chat_list_id = $message->getChatListIdByMsg($request->msg_id);
             $message->removeMsg($request->msg_id);
             $messages =  $message->getMsg($chat_list_id);
+
+
 
             $html = view('messenger.module.messages', compact('messages'))->render();
 

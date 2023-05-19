@@ -127,7 +127,7 @@
            </div>
            <div class="msg__rm__btn">
                <span class="msg__rm__cancel__btn" onclick="cancelDelete()">CANCEL</span>
-               <span class="msg__rm__delete__btn" onclick="deleteMsg()">DELETE</span>
+               <span class="msg__rm__delete__btn" onclick="deleteMsgA()">DELETE</span>
            </div>
        </div>
    </div>
