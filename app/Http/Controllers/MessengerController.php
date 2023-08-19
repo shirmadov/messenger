@@ -14,13 +14,9 @@ class MessengerController extends Controller
 
   public function index(Message $message, User $user){
 
-//      dd(Storage::exists('public'));
-
       $users = $user->getUsers();
-
-//      dd($users);
+      $user = \Auth()->user();
       $user_profile = auth()->user()->profile;
-//      dd(\Auth()->user()->profile->avatar);
       return view('messenger.messenger', compact('users'));
   }
 
@@ -28,8 +24,6 @@ class MessengerController extends Controller
   public function store(Request $request, ChatList $chatList, Message $message, UsersChatList $usersChatList, User $user){
 
       try {
-
-//          dd($request->all());
           $hash_tokens = array();
           $msg_id = '';
 
@@ -50,9 +44,7 @@ class MessengerController extends Controller
         }
 
           $message = $message->getLastMsg($msg_id);
-
           $html = view('messenger.module.message', compact('message'))->render();
-
           return response()->json([
               'success'=>true,
               'hash_tokens'=>$hash_tokens,
@@ -71,45 +63,31 @@ class MessengerController extends Controller
 
       try {
           $chat_list_id = $usersChatList->getChatListId($request->user_id);
-
           $messages =  $message->getMsg($chat_list_id);
-
-
           $html = view('messenger.module.messages', compact('messages'))->render();
-
           return response()->json(['success'=>true,'content'=>$html]);
-
-
       }catch(\Exception $e){
         return $e->getMessage();
       }
-
-
-
   }
 
   public function getMsg(Request $request,Message $message){
 
       try {
           $message = $message->getLastMsg($request->msg_id);
-
           $html = view('messenger.module.message', compact('message'))->render();
-
           return response()->json(['success'=>true,'content'=>$html]);
 
       }catch(\Exception $e){
           return $e->getMessage();
       }
-
   }
 
   public function deleteMsg(Request $request,Message $message){
       try {
-
             $chat_list_id = $message->getChatListIdByMsg($request->msg_id);
             $message->removeMsg($request->msg_id);
             $messages =  $message->getMsg($chat_list_id);
-
             $html = view('messenger.module.messages', compact('messages'))->render();
 
             return response()->json(['success'=>true,'content'=>$html]);
@@ -120,14 +98,11 @@ class MessengerController extends Controller
 
     public function downloadChatMsgFile( $id, $file )
     {
-//        dd( $id, $file);
         return response()->download(base_path() . '/storage/app/public/files/chat/'.$id.'/'.$file);
     }
 
     public function test(){
         $url = Storage::url('file.jpg');
-
-
     }
 
 

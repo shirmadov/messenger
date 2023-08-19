@@ -11,7 +11,8 @@ let o_c_ch = false;
 let msg_inf = {
     'msg_author':'',
     'msg_text':'',
-    'msg_id':''
+    'msg_id':'',
+    'msg_parent_elem':''
 };
 
 const sendMsg = async () =>{
@@ -69,7 +70,6 @@ socket.onmessage = async (event)=>{
 
 async function showRes(response, type = 1){
     if(response.success == true && type === 1){
-        console.log("Res")
         await changeRightCard()
 
         document.querySelector('.js__msg__list__ul').innerHTML = response.content;
@@ -81,7 +81,6 @@ async function showRes(response, type = 1){
 }
 
 let showMsg = async (data) => {
-    console.log(data);
     if(chosen_id !==null){
         let formData = new FormData;
         let url = app_url+'/get_msg';
@@ -138,7 +137,6 @@ const sendData = async (formData, url)=>{
             body:formData
         })
             .then(res=>res.json());
-        console.log(response.success);
         return response;
     }catch(error){
         console.log('Error:', error);
@@ -174,16 +172,15 @@ oncontextmenu = (e)=>{
     msg_inf.msg_author = target.closest('.js__msg__list__li').querySelector('.js__msg__author').value;
     msg_inf.msg_text =target.closest('.js__msg__list__li').querySelector('.js__msg__text').value;
     msg_inf.msg_id =target.closest('.js__msg__list__li').querySelector('.js__msg__id').value;
+    msg_inf.msg_parent_elem =target.closest('.js__msg__list__li');
     let context_menu = document.querySelector('.js__msg__right__menu');
     if(o_c_ch === false){
-        console.log("OPen")
         e.preventDefault();
         context_menu.style.top = e.clientY>720?`${720}px`: `${e.clientY}px`;
-        context_menu.style.left = `${e.clientX}px`;
+        context_menu.style.left = `${e.clientX}px`;fiver
         context_menu.style.display = 'block';
         o_c_ch = true;
     }else{
-        // console.log("Close")
         context_menu.style.display = 'none';
         o_c_ch = false;
         // closeMenu(e);
@@ -192,25 +189,27 @@ oncontextmenu = (e)=>{
 
 
 function clearInput(){
-    console.log("Came")
     document.querySelector('.js__msg__textarea').textContent ='';
     amount_file.innerText = 0;
     amount_file.style.display = 'none';
     msg_inf.msg_id = '';
     msg_inf.msg_author = '';
     msg_inf.msg_text = '';
+    msg_inf.msg_parent_elem = '';
 }
 
 let closeContextMenu = (e)=>{
     const target = e.target;
     if (target.closest('.js__hamburger__menu') || target.closest('.js__hm__menu__card') || target.closest('.js__msg__right__menu')) return;
     if(menu_status == true){
+
         document.querySelector('.js__hm__menu__card').style.display = 'none';
         menu_status = false;
     }
 }
 
 let clickAnywhere = ()=>{
+
     document.addEventListener('click', closeMenu, false)
     document.addEventListener('contextmenu', closeContextMenu, false)
 }
@@ -227,26 +226,9 @@ function autoScroll(){
 }
 
 
-
-// function textareaForm(){
-//     let textarea = document.querySelector('#js__msg__textarea');
-//     if(!textarea) return;
-//
-//     console.log(textarea.style.height);
-//     textarea.addEventListener('keydown', async function (e){
-//        if( e.keyCode == 13 && !e.shiftKey){
-//            e.preventDefault();
-//        }else if(e.shiftKey && e.keyCode === 13){
-//            console.log(this.style.height);
-//            this.style.height = this.scrollHeight + "px";
-//        }
-//     });
-// }
-
 function contentEditable(){
     const content = document.getElementById('message');
     const place_text = content.getAttribute('data-placeholder');
-    console.log(place_text,content.innerHTML);
     content.innerHTML = place_text
     // content.innerHTML === '' && (content.innerHTML = place_text);
     content.addEventListener('focus', function (e) {
@@ -262,9 +244,7 @@ function contentEditable(){
 
 
 function replyMsg(){
-    console.log(msg_inf);
     let test = document.querySelector('.js__msg__reply');
-    console.log(test);
     document.querySelector('.js__msg__reply').style.display='block';
     document.querySelector('.js__msg__reply__author').innerText = msg_inf.msg_author;
     document.querySelector('.js__msg__reply__text').innerText = msg_inf.msg_text.substring(0,40);
@@ -305,12 +285,14 @@ function cancelDelete(){
 }
 
 async function deleteMsgA(){
-    cancelDelete()
+    toggleModal()
     let formData = new FormData;
     let url = app_url+'/delete_msg';
 
+    console.log("Cmae",msg_inf.msg_parent_elem);
     formData.append('msg_id',msg_inf.msg_id);
     let response = await sendData(formData, url);
+    console.log(response);
     await showRes(response)
 }
 
