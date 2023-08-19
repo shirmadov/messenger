@@ -78,20 +78,15 @@ class User extends Authenticatable
         $user = \Auth()->user();
         if (isset($request['profile_img'])) {
             $filename = uniqid() . '.' . $request['profile_img']->getClientOriginalExtension();
-//            dd($request->hasFile('profile_img'));
             $filePath = 'public/img/profile';
-//            $request['profile_img']->move($filePath, $filename);
-
             $request['profile_img']->storeAs($filePath, $filename, 'private');
             Profile::where('user_id',$user->id)
             ->update(['avatar'=>$filename]);
         }
-
         $user_info = User::find($user->id);
         $user_info->name = $request['fullname'];
         $user_info->username = $request['username'];
         $user_info->save();
-
         return true;
     }
 
@@ -100,7 +95,6 @@ class User extends Authenticatable
     }
 
     public function userWanted($value){
-
         if(str_starts_with($value,'@') == false) $value = '@'.$value;
         $users = $this->where('username','like',strtolower($value).'%')
             ->join('profiles','users.id','=','profiles.user_id')
@@ -108,6 +102,5 @@ class User extends Authenticatable
             ->get();
         return $users;
     }
-
 
 }

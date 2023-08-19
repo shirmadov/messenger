@@ -177,7 +177,7 @@ oncontextmenu = (e)=>{
     if(o_c_ch === false){
         e.preventDefault();
         context_menu.style.top = e.clientY>720?`${720}px`: `${e.clientY}px`;
-        context_menu.style.left = `${e.clientX}px`;
+        context_menu.style.left = `${e.clientX}px`;fiver
         context_menu.style.display = 'block';
         o_c_ch = true;
     }else{
